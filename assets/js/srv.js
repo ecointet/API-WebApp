@@ -23,7 +23,7 @@ function GetApiResult01(url)
                 console.log(data); //RESULT RAW
 
                 var city = data.city;
-                var photo = data.url
+                var photo = data.photo;
 
                 $('#game01-result').html(city);
                 $('#title').html(city);

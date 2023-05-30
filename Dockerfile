@@ -25,7 +25,7 @@ RUN set -ex; \
 # Copy in custom code from the host machine.
 WORKDIR /var/www/html
 COPY . ./
-
+RUN CHMOD 777 -R /var/www/html/data
 # Use the PORT environment variable in Apache configuration files.
 # https://cloud.google.com/run/docs/reference/container-contract#port
 RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf

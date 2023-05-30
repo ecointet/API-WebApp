@@ -214,6 +214,7 @@
 			})
 			.on('load', function() {
 				$window.trigger('resize');
+				getUserIP();
 			});
 
 })(jQuery);

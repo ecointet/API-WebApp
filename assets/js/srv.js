@@ -13,7 +13,7 @@ function GetApiResult01(url)
     $('#loading').fadeIn();
     $('#button01').fadeOut("slow");
 
-    var url = "/srv/remote-data.php?url="+url;
+    var url = "/srv/remote-data.php?url="+url+"?ip="+$("#client_ip").val();
     console.log("API URL: ["+url+"]");
 
     try {
@@ -68,3 +68,14 @@ function GetApiResult01(url)
     $('#loading').fadeOut();
     $('#button01').fadeIn("slow");
 }
+
+async function getUserIP() {
+    try {
+      const response = await fetch('https://api.ipify.org?format=json');
+      const data = await response.json();
+      console.log('User IP Address:', data.ip);
+      $('#client_ip').val(data.ip);
+    } catch (error) {
+      console.error('Error fetching IP:', error);
+    }
+  }

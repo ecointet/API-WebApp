@@ -27,10 +27,10 @@ if (isset($_GET['url']))
 
 function location_photo($url)
 {
-    $ip = $_SERVER['REMOTE_ADDR'];
-    $ip = "46.8.175.173";
+   // $ip = $_SERVER['REMOTE_ADDR'];
+   // $ip = "46.8.175.173";
 
-    $url = $url.urlencode($ip);
+   // $url = $url.urlencode($ip);
     return $url;
 }
 ?>

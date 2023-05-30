@@ -25,6 +25,7 @@ RUN set -ex; \
 # Copy in custom code from the host machine.
 WORKDIR /var/www/html
 COPY . ./
+RUN mkdir /var/www/html/data
 RUN chmod -R 777 /var/www/html/data
 # Use the PORT environment variable in Apache configuration files.
 # https://cloud.google.com/run/docs/reference/container-contract#port

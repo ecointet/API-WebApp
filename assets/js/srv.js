@@ -13,9 +13,9 @@ function GetApiResult01(url)
     $('#loading').fadeIn();
     $('#button01').fadeOut("slow");
 
-    var url = "/srv/remote-data.php?url="+url+"/locate/?ip=";
+    var url = "/srv/remote-data.php?url="+url;
 
-    if (!url.include("mock.pstmn.io"))
+    if (!url.include("mock"))
       url = url + $("#client_ip").val();
 
     console.log("API URL: ["+url+"]");

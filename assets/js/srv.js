@@ -15,7 +15,7 @@ function GetApiResult01(url)
 
     var url = "/srv/remote-data.php?url="+url;
 
-    if (!url.include("mock"))
+    if (!url.includes("mock"))
       url = url + $("#client_ip").val();
 
     console.log("API URL: ["+url+"]");

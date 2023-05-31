@@ -47,11 +47,11 @@ else //default values
 				<h1><img src="<?php echo $logo; ?>" height="45px" style="margin:3px"/></h1>
 				<nav>
 					<ul>
-						<li><a href="#intro">Intro</a></li>
+						<li><a href="#intro">Home</a></li>
 						<li><a href="#one">Share it!</a></li>
 						<li><a href="#two">Configuration</a></li>
-						<li><a href="#work">Play</a></li>
-						<li><a href="#contact">Contact</a></li>
+						<!-- <li><a href="#work">Play</a></li>
+						<li><a href="#contact">Contact</a></li> -->
 					</ul>
 				</nav>
 			</header>
@@ -79,7 +79,7 @@ else //default values
 					<p><?php 
 					$url = $_SERVER['SERVER_NAME']."/?id=".$name;
 					echo "<a href=http://".$url." />http://".$url."</a>";
-					echo '<img src="https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=http%3A%2F%2F'.$url.'"%2F&choe=UTF-8" width="100%">';
+					echo '<img src="https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=https%3A%2F%2F'.$url.'"%2F&choe=UTF-8" width="100%">';
 					?></p>
 				</div>
 				<a href="#two" class="button style2 down anchored">Next</a>
@@ -107,10 +107,10 @@ else //default values
 					</form></p>
 					<!-- END -->
 				</div>
-				<a href="#work" class="button style2 down anchored">Next</a>
+				<!-- <a href="#work" class="button style2 down anchored">Next</a>-->
 			</section>
 
-		<!-- Work -->
+		<!-- Work 
 			<section id="work" class="main style3 primary">
 				<div class="content">
 					<header>
@@ -118,7 +118,7 @@ else //default values
 						<p>Your App can be smart thanks to your APIs.</p>
 					</header>
 
-					<!-- Gallery  -->
+					
 						<div>
 							<article id="game01">
 								<h3 onclick="GetApiResult01('<?php echo urlencode($api); ?>')"><img src="images/sync.png" width="80px"></h3>
@@ -128,8 +128,8 @@ else //default values
 
 				</div>
 			</section>
-
-		<!-- Contact -->
+-->
+		<!-- Contact
 			<section id="contact" class="main style3 secondary">
 				<div class="content">
 					<header>
@@ -150,7 +150,7 @@ else //default values
 					</div>
 				</div>
 			</section>
-
+ -->
 		<!-- Footer -->
 			<footer id="footer">
 

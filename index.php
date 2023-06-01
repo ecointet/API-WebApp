@@ -104,7 +104,7 @@ else //default values
 					<input type="text" name="company_background" id="company_background" value="<?php echo $background; ?>"><br>
 					<label for="company_api">API</label>
 					<input type="text" name="company_api" id="company_api" value="<?php echo $api; ?>"><br>
-					<input type="hidden" name="client_ip" id="client_ip" value=""><br>
+					<input type="text" name="client_ip" id="client_ip" value=""><br>
 					<input type="submit" value="Save">
 					</form></p>
 					<!-- END -->

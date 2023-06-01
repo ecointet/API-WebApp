@@ -98,7 +98,8 @@ function GetApiResult01()
     if (!url.includes("mock"))
       url = url + $("#client_ip").val();
 
-    console.log("API URL: ["+url+"]");
+    console.log("CURRENT IP: ["+$("#client_ip").val()+"]");
+    console.log("REMOTE API URL: ["+url+"]");
 
     try {
         $.getJSON(url, function( data ) {
@@ -159,7 +160,7 @@ function GetClientIP()
   var url = encodeURI("/srv/remote-data.php?url="+"http://ip-api.com/json/");
   $.getJSON(url, function(data) {
     try {   
-        console.log(data); //RESULT RAW
+        console.log("GET CLIENT IP: " + data.query); //RESULT RAW
 
         $("#client_ip").val(data.query);
     }

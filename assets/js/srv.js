@@ -157,7 +157,7 @@ function GetApiResult01()
 function GetClientIP()
 {
 
-  var url = encodeURI("/srv/remote-data.php?url="+"http://ip-api.com/json/");
+  var url = encodeURI("http://ip-api.com/json/");
   $.getJSON(url, function(data) {
     try {   
         console.log("GET CLIENT IP: " + data.query); //RESULT RAW

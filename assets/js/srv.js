@@ -157,12 +157,12 @@ function GetApiResult01()
 function GetClientIP()
 {
 
-  var url = encodeURI("http://ip-api.com/json/");
+  var url = encodeURI("https://api.ipify.org/?format=json");
   $.getJSON(url, function(data) {
     try {   
-        console.log("GET CLIENT IP: " + data.query); //RESULT RAW
+        console.log("GET CLIENT IP: " + data.ip); //RESULT RAW
 
-        $("#client_ip").val(data.query);
+        $("#client_ip").val(data.ip);
     }
     catch ({ name, message }) {
         console.log("error:" + name); // "TypeError"

@@ -52,6 +52,8 @@ function urldecode(url) {
 
 function refreshUserData()
 {
+  GetClientIP();
+  
   var url = "/srv/remote-data.php?id="+$("#company_name").val();
 
   $.getJSON(url, function(data) {
@@ -147,13 +149,31 @@ function GetApiResult01(url)
     $('#button01').fadeIn("slow");
 }
 
-async function getUserIP() {
-    try {
-      const response = await fetch('https://api.ipify.org?format=json');
-      const data = await response.json();
-      console.log('User IP Address:', data.ip);
-      $('#client_ip').val(data.ip);
-    } catch (error) {
-      console.error('Error fetching IP:', error);
+function GetClientIP()
+{
+
+  var url = "/srv/remote-data.php?url="+"http://ip-api.com/json/";
+  $.getJSON(url, function(data) {
+    try {   
+        console.log(data); //RESULT RAW
+
+        $("#client_ip").val(data.query);
     }
-  }
+    catch ({ name, message }) {
+        console.log("error:" + name); // "TypeError"
+        console.log("error desc: " + message); // "oops"
+      }
+})
+.done(function() {
+    console.log( "API successfuly loaded" );
+  })
+  .fail(function() {
+    console.log( "error" );
+    $('#title').html("Oups.");
+    $('#description').html("API Not working :( ");
+  })
+  .always(function() {
+    console.log( "API stage: END" );
+  });
+
+}

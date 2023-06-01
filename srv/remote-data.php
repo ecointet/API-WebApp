@@ -11,7 +11,7 @@ $data = new \SleekDB\Store("data_info", $databaseDirectory, $configuration);
 
 if (isset($_GET['url']))
 {
-    $url = location_photo($_GET['url']);
+    $url = $_GET['url'];
    // print_r("[data:".$url."]");
     
    // CURL
@@ -44,12 +44,4 @@ if (isset($_GET['id']))
     die("0");
 }
 
-function location_photo($url)
-{
-   // $ip = $_SERVER['REMOTE_ADDR'];
-   // $ip = "46.8.175.173";
-
-   // $url = $url.urlencode($ip);
-    return $url;
-}
 ?>

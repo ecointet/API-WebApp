@@ -53,16 +53,18 @@ function urldecode(url) {
 function refreshUserData()
 {
   GetClientIP();
-  
+
   var url = "/srv/remote-data.php?id="+$("#company_name").val();
 
   $.getJSON(url, function(data) {
     try {   
         console.log(data); //RESULT RAW
-
-        $("#company_logo").val(data.logo);
-        $("#company_background").val(data.background);
-        $("#company_api").val(urldecode(data.api));
+        if (data.logo && data.background)
+        {
+          $("#company_logo").val(data.logo);
+          $("#company_background").val(data.background);
+          $("#company_api").val(urldecode(data.api));
+        }
     }
     catch ({ name, message }) {
         console.log("error:" + name); // "TypeError"
@@ -82,8 +84,10 @@ function refreshUserData()
   });
 }
 
-function GetApiResult01(url)
+function GetApiResult01()
 {
+
+    url = encodeURI($('#company_api').val());
 
     $('#loading').fadeIn();
     refreshUserData();
@@ -152,7 +156,7 @@ function GetApiResult01(url)
 function GetClientIP()
 {
 
-  var url = "/srv/remote-data.php?url="+"http://ip-api.com/json/";
+  var url = encodeURI("/srv/remote-data.php?url="+"http://ip-api.com/json/");
   $.getJSON(url, function(data) {
     try {   
         console.log(data); //RESULT RAW

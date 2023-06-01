@@ -65,7 +65,7 @@ else //default values
 					<p id="description">Welcome to <strong>your Web App</strong>, now you probably need some APIs to make it cool.</p>
 					<footer>
 					<div id="loading" style="display: none;">Fetching API data...</div>
-					<img id="button01" src="images/sync.png" width="80px" onclick="GetApiResult01('<?php echo urlencode($api); ?>')"></img>
+					<img id="button01" src="images/sync.png" width="80px" onclick="GetApiResult01()"></img>
 					</footer>
 				</div>
 			</section>

@@ -107,6 +107,11 @@ function GetApiResult01()
             try {   
                 console.log(data); //RESULT RAW
 
+                if (data.city == undefined)
+                    throw new Error('API Failed'); 
+                  
+
+
                 var city = data.city;
                 var photo = data.photo;
 

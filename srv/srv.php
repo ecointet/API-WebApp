@@ -19,7 +19,13 @@ if (isset($_POST['company_name']))
         'api' => urlencode($company_api)
     ];
 
-    $result = $data->insert($company);
+
+    $exist_result = $data->findBy(["name", "=", $company_name], ["_id" => "desc"], 1);
+   
+    if ($exist_result)
+        $result = $data->updateById($exist_result[0]["_id"], $company);
+    else
+        $result = $data->insert($company);
     
    // if ($result) $result = $result[0];
    // else unset($result);

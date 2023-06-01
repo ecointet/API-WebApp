@@ -78,7 +78,7 @@ else //default values
 					</header>
 					<p><?php 
 					$url = $_SERVER['SERVER_NAME']."/?id=".$name;
-					echo "<a href=http://".$url." />http://".$url."</a>";
+					echo "<a href=https://".$url." />http://".$url."</a>";
 					echo '<img src="https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=https%3A%2F%2F'.$url.'"%2F&choe=UTF-8" width="100%">';
 					?></p>
 				</div>
@@ -95,7 +95,9 @@ else //default values
 					<!-- CONFIG -->	
 					<form action="/?save" method="post">
 					<label for="company_name">Company Name</label>
-					<input type="text" name="company_name"  id="company_name" value="<?php echo $name; ?>"><br>
+					<input type="text" name="company_name"  id="company_name" value="<?php echo $name; ?>">
+					<span id="suggestion"></span>
+					<br>
 					<label for="company_logo">Company Logo</label>
 					<input type="text" name="company_logo"  id="company_logo" value="<?php echo $logo; ?>"><br>
 					<label for="company_background">Company Background</label>

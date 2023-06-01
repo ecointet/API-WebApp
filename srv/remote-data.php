@@ -2,6 +2,12 @@
 // Web App To demonstrate tons of APIS
 // Built for demo purposes (by Postman)
 // Author: @ecointet (twitter)
+require "database/Store.php"; //database
+$databaseDirectory = "../data";
+$configuration = [
+	"timeout" => false
+  ];
+$data = new \SleekDB\Store("data_info", $databaseDirectory, $configuration);
 
 if (isset($_GET['url']))
 {
@@ -23,6 +29,19 @@ if (isset($_GET['url']))
         die("0");
     
     die($result);
+}
+
+if (isset($_GET['id']))
+{
+    $id = $_GET['id'];
+
+    //Search in Database
+    $result = $data->findBy(["name", "like", strtolower($id)], ["_id" => "desc"]);
+   // $data->deleteBy(["name", "=", strtolower($id)]);
+    if ($result) $result =  $result[0];
+
+    die(json_encode($result));
+    die("0");
 }
 
 function location_photo($url)

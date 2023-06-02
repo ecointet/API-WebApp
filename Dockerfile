@@ -25,10 +25,11 @@ RUN set -ex; \
 # Copy in custom code from the host machine.
 WORKDIR /var/www/html
 COPY . ./
-RUN mkdir /var/www/html/data
-RUN chmod -R 777 /var/www/html/data
+
 # Use the PORT environment variable in Apache configuration files.
 # https://cloud.google.com/run/docs/reference/container-contract#port
+RUN a2enmod rewrite
+RUN cp srv/.apache /etc/apache2/sites-available/000-default.conf
 RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
 
 # Configure PHP for development.

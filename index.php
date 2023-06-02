@@ -1,3 +1,8 @@
+<?php
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+?>
 <!DOCTYPE HTML>
 <!--
 ===== Web App To demonstrate tons of APIS
@@ -77,8 +82,8 @@ else //default values
 						<h2>Share it!</h2>
 					</header>
 					<p><?php 
-					$url = $_SERVER['SERVER_NAME']."/?id=".$name;
-					echo "<a href=https://".$url." />http://".$url."</a>";
+					$url = $_SERVER['SERVER_NAME']."/".$name;
+					echo "<a href=https://".$url." />https://".$url."</a>";
 					echo '<img src="https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=https%3A%2F%2F'.$url.'"%2F&choe=UTF-8" width="100%">';
 					?></p>
 				</div>

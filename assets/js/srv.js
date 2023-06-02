@@ -19,7 +19,7 @@ $('#company_name').on('input', function() {
 
         if (data.name != undefined)
         {
-          var txt = "Do you mean <a href='/?id="+data.name+"'><b>"+data.name+"</b></a> ?"
+          var txt = "Do you mean <a href='/"+data.name+"'><b>"+data.name+"</b></a> ?"
          $("#suggestion").html(txt);
           console.log(" detected: "+txt);
       }

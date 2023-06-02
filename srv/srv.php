@@ -10,15 +10,16 @@ if (isset($_POST['company_name']))
     $company_logo = $_POST['company_logo'];
     $company_background = $_POST['company_background'];
     $company_api = $_POST['company_api'];
+    $company_option = $_POST['company_option'];
    // echo "write data:".$company_name;
     
     $company = [
         'name' =>  $company_name ,
         'logo' => $company_logo,
         'background' => $company_background,
-        'api' => urlencode($company_api)
+        'api' => urlencode($company_api),
+        'option' => $company_option
     ];
-
 
     $exist_result = $data->findBy(["name", "=", $company_name], ["_id" => "desc"], 1);
    

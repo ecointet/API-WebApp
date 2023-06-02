@@ -5,7 +5,7 @@
 */
 
 $("#intro").css({
-    'background'    : 'url('+$("#company_background").val()+')'
+    'background'    : 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('+$("#company_background").val()+')'
 });
 
 $('#company_name').on('input', function() {
@@ -64,6 +64,8 @@ function refreshUserData()
           $("#company_logo").val(data.logo);
           $("#company_background").val(data.background);
           $("#company_api").val(urldecode(data.api));
+          $('#company_option').removeAttr('selected').filter('[value='+data.option+']').attr('selected', true);
+          $('#company_option').val(data.option);
         }
     }
     catch ({ name, message }) {
@@ -110,8 +112,6 @@ function GetApiResult01()
                 if (data.city == undefined)
                     throw new Error('API Failed'); 
                   
-
-
                 var city = data.city;
                 var photo = data.photo;
 
@@ -120,7 +120,7 @@ function GetApiResult01()
                 $('#description').html("is not far away from you!");
             
                 $("#intro").css({
-                    'background'    : 'url('+photo+')'
+                    'background'    : 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('+photo+')'
                 }).animate({opacity: '0.3'}, "slow").animate({opacity: '1'}, "slow");
             }
             catch ({ name, message }) {
@@ -129,12 +129,34 @@ function GetApiResult01()
                 $('#title').html("Oups.");
                 $('#description').html("API Not working :( ");
                 $("#intro").css({
-                    'background'    : 'url('+$("#company_background").val()+')'
+                    'background'    : 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('+$("#company_background").val()+')'
                 });
               }
         })
         .done(function() {
             console.log( "API successfuly loaded" );
+            
+            //CHAT GPT OPTION (EXPERIMENTAL)
+            if ($('#company_option').find(":selected").val() == "chatgpt_option")
+            {
+              $('#loading').fadeIn();
+              $('#button01').fadeOut("slow");
+              var url = "/srv/remote-data.php?url=https://api.gcp.cointet.com/chatgpt/"+$('#title').html().replace(/\s/g, '');
+              $.getJSON(url, function( data ) {
+                  console.log("chatGPT URL:"+url);
+                  console.log(data); //RESULT RAW
+                  $('#description').html(data.answer);
+              })
+              .done(function() {
+               
+
+              })
+              .always(function() {
+                $('#loading').fadeOut();
+                $('#button01').fadeIn("slow");
+              })
+            }
+          
           })
           .fail(function() {
             console.log( "error" );
@@ -151,7 +173,7 @@ function GetApiResult01()
         $('#title').html("Oups.");
         $('#description').html("API Not working :( ");
         $("#intro").css({
-            'background'    : 'url('+$("#company_background").val()+')'
+            'background'    : 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('+$("#company_background").val()+')'
         });
       }
 

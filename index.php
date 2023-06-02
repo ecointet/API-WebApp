@@ -27,6 +27,7 @@ if (isset($result))
 	$name = $result['name'];
 	$background = $result['background'];
 	$api = urldecode($result['api']);
+	$option = $result['option'];
 }
 else //default values
 {
@@ -98,6 +99,7 @@ else //default values
 					</header>
 					<p>
 					<!-- CONFIG -->	
+					
 					<form action="/?save" method="post">
 					<label for="company_name">Company Name</label>
 					<input type="text" name="company_name"  id="company_name" value="<?php echo $name; ?>">
@@ -109,6 +111,10 @@ else //default values
 					<input type="text" name="company_background" id="company_background" value="<?php echo $background; ?>"><br>
 					<label for="company_api">API</label>
 					<input type="text" name="company_api" id="company_api" value="<?php echo $api; ?>"><br>
+						<select name="company_option" id="company_option">
+						<option value="no_option" <?php if (!$option) echo 'selected="selected"' ?>>Options (optionnal)</option>
+						<option value="chatgpt_option" <?php if ($option == "chatgpt_option") echo 'selected="selected"' ?>>chatGPT</option>
+						</select>
 					<input type="hidden" name="client_ip" id="client_ip" value=""><br>
 					<input type="submit" value="Save">
 					</form></p>

@@ -35,6 +35,7 @@ else //default values
 	$logo = "/images/postman/logo.png";
 	$background = "/images/postman/intro.svg";
 	$api = "n/a";
+	$option = "no_option";
 }
 ?>
 <html>
@@ -112,7 +113,7 @@ else //default values
 					<label for="company_api">API</label>
 					<input type="text" name="company_api" id="company_api" value="<?php echo $api; ?>"><br>
 						<select name="company_option" id="company_option">
-						<option value="no_option" <?php if (!$option) echo 'selected="selected"' ?>>Options (optionnal)</option>
+						<option value="no_option" <?php if ($option == "no_option") echo 'selected="selected"' ?>>Options (optionnal)</option>
 						<option value="chatgpt_option" <?php if ($option == "chatgpt_option") echo 'selected="selected"' ?>>chatGPT</option>
 						</select>
 					<input type="hidden" name="client_ip" id="client_ip" value=""><br>

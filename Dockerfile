@@ -32,6 +32,10 @@ RUN a2enmod rewrite
 RUN cp srv/.apache /etc/apache2/sites-available/000-default.conf
 RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
 
+# CREATE THE FOLDER FOR THE DATABASE
+RUN mkdir /var/www/html/data
+RUN chmod -R 777 /var/www/html/data
+
 # Configure PHP for development.
 # Switch to the production php.ini for production operations.
 # RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"

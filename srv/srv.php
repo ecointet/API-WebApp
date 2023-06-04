@@ -6,7 +6,7 @@
 //SAVE NEW DATA
 if (isset($_POST['company_name']))
 {
-    $company_name = strtolower($_POST['company_name']);
+    $company_name =  preg_replace('/[^A-Za-z0-9\-]/', '', str_replace(' ', '', strtolower($_POST['company_name'])));
     $company_logo = $_POST['company_logo'];
     $company_background = $_POST['company_background'];
     $company_api = $_POST['company_api'];
@@ -28,6 +28,7 @@ if (isset($_POST['company_name']))
     else
         $result = $data->insert($company);
     
+    header('Location: /'.$company_name);
    // if ($result) $result = $result[0];
    // else unset($result);
    // print_r($user);

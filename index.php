@@ -51,7 +51,7 @@ else //default values
 
 		<!-- Header -->
 			<header id="header">
-				<h1><img src="<?php echo $logo; ?>" height="45px" style="margin:3px"/></h1>
+				<h1><img src="<?php echo $logo; ?>" height="43px" style="margin-top:2px"/></h1>
 				<nav>
 					<ul>
 						<li><a href="#intro">Home</a></li>

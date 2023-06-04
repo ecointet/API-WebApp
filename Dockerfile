@@ -33,7 +33,7 @@ RUN cp srv/.apache /etc/apache2/sites-available/000-default.conf
 RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
 
 # CREATE THE FOLDER FOR THE DATABASE
-RUN mkdir /var/www/html/data
+RUN mkdir -p /var/www/html/data
 RUN chmod -R 777 /var/www/html/data
 
 # Configure PHP for development.

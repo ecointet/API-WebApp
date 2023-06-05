@@ -5,7 +5,10 @@
 */
 
 $("#intro").css({
-    'background'    : 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('+$("#company_background").val()+')'
+    'background'    : 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url('+$("#company_background").val()+')',
+    'background-repeat': 'no-repeat',
+    'background-position': 'center',
+    'background-size': 'cover'
 });
 
 $('#company_name').on('input', function() {
@@ -88,7 +91,6 @@ function refreshUserData()
 
 function GetApiResult01()
 {
-  console.log("passe");
   var url = encodeURI($('#company_api').val());
 
     $('#loading').fadeIn();
@@ -119,7 +121,10 @@ function GetApiResult01()
                 $('#description').html("is not far away from you!");
             
                 $("#intro").css({
-                    'background'    : 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('+photo+')'
+                    'background'    : 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url('+photo+')',
+                    'background-repeat': 'no-repeat',
+                    'background-position': 'center',
+                    'background-size': 'cover'
                 }).animate({opacity: '0.3'}, "slow").animate({opacity: '1'}, "slow");
             }
             catch ({ name, message }) {
@@ -128,7 +133,10 @@ function GetApiResult01()
                 $('#title').html("Oups.");
                 $('#description').html("API Not working :( ");
                 $("#intro").css({
-                    'background'    : 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('+$("#company_background").val()+')'
+                    'background'    : 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url('+$("#company_background").val()+')',
+                    'background-repeat': 'no-repeat',
+                    'background-position': 'center',
+                    'background-size': 'cover'
                 });
               }
         })
@@ -172,7 +180,10 @@ function GetApiResult01()
         $('#title').html("Oups.");
         $('#description').html("API Not working :( ");
         $("#intro").css({
-            'background'    : 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),url('+$("#company_background").val()+')'
+            'background'    : 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url('+$("#company_background").val()+')',
+            'background-repeat': 'no-repeat',
+            'background-position': 'center',
+            'background-size': 'cover'
         });
       }
 
@@ -210,7 +221,6 @@ function GetClientIP()
 }
 
 function reformatIP(url) {
-  console.log("passe");
   //is a Mock Server - do nothing
   if (url.includes("mock"))
     return url;

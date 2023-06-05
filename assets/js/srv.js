@@ -89,16 +89,16 @@ function refreshUserData()
 function GetApiResult01()
 {
 
-    url = encodeURI($('#company_api').val());
+    var url = encodeURI($('#company_api').val());
+
+    //REFORMAT IP Params
+    url = reformatIP(url);
 
     $('#loading').fadeIn();
-    refreshUserData();
+    refreshUserData().delay(1000);
     $('#button01').fadeOut("slow");
 
-    var url = "/srv/remote-data.php?url="+url;
-
-    if (!url.includes("mock"))
-      url = url + $("#client_ip").val();
+    url = "/srv/remote-data.php?url="+url;
 
     console.log("CURRENT IP: ["+$("#client_ip").val()+"]");
     console.log("REMOTE API URL: ["+url+"]");
@@ -208,4 +208,22 @@ function GetClientIP()
     console.log( "API stage: END" );
   });
 
+}
+
+function reformatIP(url) {
+  //is a Mock Server - do nothing
+  if (url.includes("mock"))
+    return url;
+  
+  var parts = url.split("/locate/");
+  //is a prod Server - reformat and add client IP
+  if (parts.length > 1) {
+    //IS Valid IP, do nothing
+    var pattern = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/;
+    if (pattern.test(parts[1]))
+      return url;
+  }
+
+  // Otherwise add Client IP
+  return parts[0]+"/locate/"+$("#client_ip").val();
 }

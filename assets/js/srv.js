@@ -88,16 +88,15 @@ function refreshUserData()
 
 function GetApiResult01()
 {
-
-    var url = encodeURI($('#company_api').val());
-
-    //REFORMAT IP Params
-    url = reformatIP(url);
+  console.log("passe");
+  var url = encodeURI($('#company_api').val());
 
     $('#loading').fadeIn();
-    refreshUserData().delay(1000);
+    refreshUserData();
     $('#button01').fadeOut("slow");
-
+ 
+    //REFORMAT IP Params
+    url = reformatIP(url);
     url = "/srv/remote-data.php?url="+url;
 
     console.log("CURRENT IP: ["+$("#client_ip").val()+"]");
@@ -211,11 +210,13 @@ function GetClientIP()
 }
 
 function reformatIP(url) {
+  console.log("passe");
   //is a Mock Server - do nothing
   if (url.includes("mock"))
     return url;
   
   var parts = url.split("/locate/");
+  console.log("parts:" + parts);
   //is a prod Server - reformat and add client IP
   if (parts.length > 1) {
     //IS Valid IP, do nothing
@@ -223,7 +224,7 @@ function reformatIP(url) {
     if (pattern.test(parts[1]))
       return url;
   }
-
+  
   // Otherwise add Client IP
   return parts[0]+"/locate/"+$("#client_ip").val();
 }

@@ -103,7 +103,7 @@ else //default values
 					
 					<form action="/?save" method="post">
 					<label for="company_name">Company Name</label>
-					<input type="text" name="company_name"  id="company_name" value="<?php echo $name; ?>">
+					<input type="text" autocomplete="off" name="company_name" id="company_name" value="<?php echo $name; ?>">
 					<span id="suggestion"></span>
 					<br>
 					<label for="company_logo">Company Logo</label>

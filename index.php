@@ -33,10 +33,11 @@ else //default values
 {
 	$name = "Postman";
 	$logo = "/images/postman/logo.png";
-	$background = "/images/postman/intro.svg";
+	$background = "/images/postman/intro.jpg";
 	$api = "n/a";
 	$option = "no_option";
 }
+$url = "https://".$_SERVER['SERVER_NAME']."/".$name;
 ?>
 <html>
 	<head>
@@ -51,7 +52,7 @@ else //default values
 
 		<!-- Header -->
 			<header id="header">
-				<h1><img src="<?php echo $logo; ?>" height="43px" style="margin-top:2px"/></h1>
+				<h1><a href="<?php echo $url; ?>"><img src="<?php echo $logo; ?>" height="43px" style="margin-top:2px"/></a></h1>
 				<nav>
 					<ul>
 						<li><a href="#intro">Home</a></li>
@@ -84,9 +85,8 @@ else //default values
 						<h2>Share it!</h2>
 					</header>
 					<p><?php 
-					$url = $_SERVER['SERVER_NAME']."/".$name;
-					echo "<a href=https://".$url." />https://".$url."</a>";
-					echo '<img src="https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=https%3A%2F%2F'.$url.'"%2F&choe=UTF-8" width="100%">';
+					echo "<a href=".$url.">".$url."</a>";
+					echo '<img src="https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl='.$url.'"%2F&choe=UTF-8" width="100%">';
 					?></p>
 				</div>
 				<a href="#two" class="button style2 down anchored">Next</a>

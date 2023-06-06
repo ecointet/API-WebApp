@@ -27,7 +27,7 @@ $cfg['blowfish_secret'] = md5(getenv("SQL_HOST")); /* YOU MUST FILL IN THIS FOR 
 $i = 0;
 
 // Change this to use the project and instance that you've created.
-$host = '/cloudsql/'.getenv("SQL_HOST");
+$host = getenv("SQL_HOST");
 $type = 'socket';
 
 /*

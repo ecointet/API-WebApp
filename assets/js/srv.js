@@ -12,7 +12,7 @@ $("#intro").css({
 });
 
 $('#company_name').on('input', function() {
-  if ($('#company_name').val().length >= 2)
+  if ($('#company_name').val().length > 1)
   {
   var url = "/srv/remote-data.php?id="+$("#company_name").val()+"%";
 

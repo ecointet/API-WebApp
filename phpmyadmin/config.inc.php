@@ -19,7 +19,7 @@
  * cookie
  * http://www.question-defense.com/tools/phpmyadmin-blowfish-secret-generator
  */
-$cfg['blowfish_secret'] = md5(getenv("MYSQL")); /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
+$cfg['blowfish_secret'] = md5(getenv("SQL_HOST")); /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
 
 /*
  * Servers configuration
@@ -27,7 +27,7 @@ $cfg['blowfish_secret'] = md5(getenv("MYSQL")); /* YOU MUST FILL IN THIS FOR COO
 $i = 0;
 
 // Change this to use the project and instance that you've created.
-$host = '/cloudsql/'.getenv("MYSQL");
+$host = '/cloudsql/'.getenv("SQL_HOST");
 $type = 'socket';
 
 /*

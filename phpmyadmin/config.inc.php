@@ -19,7 +19,7 @@
  * cookie
  * http://www.question-defense.com/tools/phpmyadmin-blowfish-secret-generator
  */
-$cfg['blowfish_secret'] = '8JdfsdfuY99kkkllOLks'; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
+$cfg['blowfish_secret'] = md5(getenv("MYSQL")); /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
 
 /*
  * Servers configuration

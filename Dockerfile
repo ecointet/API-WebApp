@@ -6,6 +6,7 @@ FROM php:8.0-apache
 # Configure PHP for Cloud Run.
 # Precompile PHP code with opcache.
 RUN docker-php-ext-install -j "$(nproc)" opcache
+RUN docker-php-ext-install mysqli
 #RUN docker-php-ext-install curl
 RUN set -ex; \
   { \
@@ -28,7 +29,8 @@ COPY . ./
 
 # Use the PORT environment variable in Apache configuration files.
 # https://cloud.google.com/run/docs/reference/container-contract#port
-RUN a2enmod rewrite mysqli
+RUN apt-get update
+RUN a2enmod rewrite
 RUN cp srv/.apache /etc/apache2/sites-available/000-default.conf
 RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
 

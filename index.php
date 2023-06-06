@@ -34,7 +34,7 @@ else //default values
 	$name = "Postman";
 	$logo = "/images/postman/logo.png";
 	$background = "/images/postman/intro.jpg";
-	$api = "n/a";
+	$api = "API-URL";
 	$option = "no_option";
 }
 $url = "https://".$_SERVER['SERVER_NAME']."/".$name;
@@ -105,18 +105,21 @@ $url = "https://".$_SERVER['SERVER_NAME']."/".$name;
 					<label for="company_name">Company Name</label>
 					<input type="text" autocomplete="off" name="company_name" id="company_name" value="<?php echo $name; ?>">
 					<span id="suggestion"></span>
-					<br>
-					<label for="company_logo">Company Logo</label>
-					<input type="text" name="company_logo"  id="company_logo" value="<?php echo $logo; ?>"><br>
-					<label for="company_background">Company Background</label>
-					<input type="text" name="company_background" id="company_background" value="<?php echo $background; ?>"><br>
-					<label for="company_api">API</label>
-					<input type="text" name="company_api" id="company_api" value="<?php echo $api; ?>"><br>
+					<img src="/images/config-color.png" width="25px" id="config" />
+					<div id="config_advanced" style="display:none;">
+						<label for="company_logo">Company Logo</label>
+						<input type="text" autocomplete="off" name="company_logo"  id="company_logo" value="<?php echo $logo; ?>"><br>
+						<label for="company_background">Company Background</label>
+						<input type="text" autocomplete="off" name="company_background" id="company_background" value="<?php echo $background; ?>"><br>
+						<label for="company_option">Bonus effects</label>
 						<select name="company_option" id="company_option">
 						<option value="no_option" <?php if ($option == "no_option") echo 'selected="selected"' ?>>Options (optionnal)</option>
 						<option value="chatgpt_option" <?php if ($option == "chatgpt_option") echo 'selected="selected"' ?>>chatGPT</option>
-						</select>
-					<input type="hidden" name="client_ip" id="client_ip" value=""><br>
+						</select><hr>
+					</div>
+					<input type="text" autocomplete="off" name="company_api" id="company_api" value="<?php echo $api; ?>">			
+					<input type="hidden" name="client_ip" id="client_ip" value="">
+					<br>
 					<input type="submit" value="Save">
 					</form></p>
 					<!-- END -->

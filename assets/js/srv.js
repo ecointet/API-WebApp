@@ -11,11 +11,25 @@ $("#intro").css({
     'background-size': 'cover'
 });
 
+$("#company_logo").on("focus", function() {
+  $("#company_logo").val("");
+});
+$("#company_background").on("focus", function() {
+  $("#company_background").val("");
+});
+$("#company_api").on("focus", function() {
+  $("#company_api").val("");
+});
+
+//AUTO-COMPLETE
 $('#company_name').on('input', function() {
   if ($('#company_name').val().length > 1)
   {
   var url = "/srv/remote-data.php?id="+$("#company_name").val()+"%";
-
+  //CLEAN CONFIG
+  $('#company_logo').val("");
+  $('#company_background').val("");
+  //SEARCH COMPANY
   $.getJSON(url, function(data) {
     try {   
         console.log(data); //RESULT RAW
@@ -23,8 +37,7 @@ $('#company_name').on('input', function() {
         if (data.name != undefined)
         {
           var txt = "Do you mean <a href='/"+data.name+"'><b>"+data.name+"</b></a> ?"
-         $("#suggestion").html(txt);
-          console.log(" detected: "+txt);
+          $("#suggestion").html(txt);
       }
     }
     catch ({ name, message }) {
@@ -238,3 +251,9 @@ function reformatIP(url) {
   // Otherwise add Client IP
   return parts[0]+"/locate/"+$("#client_ip").val();
 }
+
+//ADVANCED CONFIG
+$('#config').click(function () {
+    
+    $('#config_advanced').toggle("slow");
+});

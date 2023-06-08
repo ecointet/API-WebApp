@@ -246,10 +246,15 @@ function reformatIP(url) {
     var pattern = /^([0-9]{1,3}\.){3}[0-9]{1,3}$/;
     if (pattern.test(parts[1]))
       return url;
+
+    return parts[0]+"/locate/"+$("#client_ip").val();
   }
   
   // Otherwise add Client IP
-  return parts[0]+"/locate/"+$("#client_ip").val();
+  if (url.includes("/locate"))
+    return url+"/"+$("#client_ip").val();
+  
+  return url;
 }
 
 //ADVANCED CONFIG

@@ -6,6 +6,7 @@ FROM php:8.0-apache
 # Configure PHP for Cloud Run.
 # Precompile PHP code with opcache.
 RUN docker-php-ext-install -j "$(nproc)" opcache
+RUN docker-php-ext-install mysqli
 #RUN docker-php-ext-install curl
 RUN set -ex; \
   { \
@@ -34,10 +35,20 @@ COPY . ./
 RUN a2enmod rewrite
 RUN cp srv/.apache /etc/apache2/sites-available/000-default.conf
 RUN sed -i 's/80/${PORT}/g' /etc/apache2/sites-available/000-default.conf /etc/apache2/ports.conf
-
+    
 # CREATE THE FOLDER FOR THE DATABASE
-#RUN mkdir -p /var/www/html/data
-#RUN chmod -R 777 /data
+RUN mkdir -p /var/www/html/data
+RUN chmod -R 777 /var/www/html/data
+
+#GOOGLE API KEY
+ENV GKEY=
+ENV PORT=8080
+
+#FILE or SQL (database type)
+ENV DB_TYPE=FILE
+ENV SQL_DB=api-webapp
+ENV SQL_HOST=db
+ENV SQL_PWD=
 
 # Configure PHP for development.
 # Switch to the production php.ini for production operations.

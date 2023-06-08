@@ -2,12 +2,14 @@
 // Web App To demonstrate tons of APIS
 // Built for demo purposes (by Postman)
 // Author: @ecointet (twitter)
-require "database/Store.php"; //database
-$databaseDirectory = "../data";
-$configuration = [
-	"timeout" => false
-  ];
-$data = new \SleekDB\Store("data_info", $databaseDirectory, $configuration);
+require "data.php"; //data management
+
+$sql = false;
+  
+if (getenv("DB_TYPE") && getenv("DB_TYPE") == "SQL")
+  $sql = true;
+
+$data = connect($sql);
 
 if (isset($_GET['url']))
 {
@@ -36,12 +38,13 @@ if (isset($_GET['id']))
     $id = $_GET['id'];
 
     //Search in Database
-    $result = $data->findBy(["name", "like", strtolower($id)], ["_id" => "desc"]);
+    $result = selectData($sql, $data, ["name", "like", strtolower($id)], ["_id" => "desc"], 1);
    // $data->deleteBy(["name", "=", strtolower($id)]);
-    if ($result) $result =  $result[0];
-
+   // if ($result) $result =  $result[0];
     die(json_encode($result));
-    die("0");
 }
 
+?>
+<?php
+if ($sql) $mysqli -> close();
 ?>

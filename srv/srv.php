@@ -6,10 +6,10 @@
 //SAVE NEW DATA
 if (isset($_POST['company_name']))
 {
-    $result = CreateACompany($_POST, $data);
+    $result = CreateACompany($_POST, $data, $sql);
 }
 
-function CreateACompany($details, $data)
+function CreateACompany($details, $data, $sql)
 {
     $company_name = $details['company_name'];
     
@@ -19,8 +19,11 @@ function CreateACompany($details, $data)
     $company_option = SetDefaultValues($details, "company_option");
 
     //Default Account : Postman
-    $company_logo = "/images/postman/logo.png";
-	$company_background = "/images/postman/intro.jpg";
+    if (strtolower($company_name) == "postman")
+    {
+        $company_logo = "/images/postman/logo.png";
+	    $company_background = "/images/postman/intro.jpg";
+    }
 
     //Get Images from Google if not set
     if ($company_logo == "")
@@ -35,15 +38,16 @@ function CreateACompany($details, $data)
         'logo' => $company_logo,
         'background' => $company_background,
         'api' => urlencode($company_api),
-        'option' => $company_option
+        'opt' => $company_option
     ];
 
-    $exist_result = $data->findBy(["name", "=", $company_name], ["_id" => "desc"], 1);
+    //SEARCH IF COMPANY EXISTS
+    $exist_result = selectData($sql, $data, ["name", "=", "$company_name"], ["_id" => "desc"], 1);
    
     if ($exist_result)
-        $result = $data->updateById($exist_result[0]["_id"], $company);
+        $result = updateDataById($sql, $data, $exist_result["_id"], $company);
     else
-        $result = $data->insert($company);
+        $result = insertData($sql, $data, $company);
     
     return $result;
    // header('Location: /'.$company_name);
@@ -56,13 +60,12 @@ function CreateACompany($details, $data)
 //GET EXISTING DATA
 if (isset($_GET['id']))
 {
-    $result = $data->findBy(["name", "=", strtolower($_GET['id'])], ["_id" => "desc"], 1);
-    if ($result) $result = $result[0];
-    else 
+    $result = selectData($sql, $data, ["name", "=", strtolower($_GET['id'])], ["_id" => "desc"], 1);
+    if (!$result)
     {
         //CREATE A NEW COMPANY ASAP
         $details['company_name'] = $_GET['id'];
-        $result = CreateACompany($details, $data);
+        $result = CreateACompany($details, $data, $sql);
     }
    // print_r($result[0]['logo']);
    // die();
@@ -86,7 +89,7 @@ function GetImagefromGoogle($keywords, $type, $size)
     //$rights = "cc_sharealike";
    // $url = $url."&rights=".$rights;
     $retour = getdatafromapi($url);
-  //  die($url);
+    
   //if ($type == "color")
   //  die($retour);
     $json = json_decode($retour);

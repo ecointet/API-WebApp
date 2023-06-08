@@ -10,12 +10,14 @@ header("Pragma: no-cache");
 ===== Author: @ecointet (twitter)
 -->
 <?php
-require "srv/database/Store.php"; //database
-$databaseDirectory = __DIR__ . "/data";
-$configuration = [
-	"timeout" => false
-  ];
-$data = new \SleekDB\Store("data_info", $databaseDirectory, $configuration);
+require "srv/data.php"; //data management
+
+$sql = false;
+  
+if (getenv("DB_TYPE") && getenv("DB_TYPE") == "SQL")
+  $sql = true;
+
+$data = connect($sql);
 
 //Core SRV
 require "srv/srv.php";
@@ -27,7 +29,7 @@ if (isset($result))
 	$name = $result['name'];
 	$background = $result['background'];
 	$api = urldecode($result['api']);
-	$option = $result['option'];
+	$option = $result['opt'];
 }
 else //default values
 {
@@ -198,3 +200,7 @@ $url = "https://".$_SERVER['SERVER_NAME']."/".$name;
 			<script src="assets/js/srv.js"></script>
 	</body>
 </html>
+
+<?php
+if ($sql) $data -> close();
+?>

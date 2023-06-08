@@ -80,8 +80,8 @@ function refreshUserData()
           $("#company_logo").val(data.logo);
           $("#company_background").val(data.background);
           $("#company_api").val(urldecode(data.api));
-          $('#company_option').removeAttr('selected').filter('[value='+data.option+']').attr('selected', true);
-          $('#company_option').val(data.option);
+          $('#company_option').removeAttr('selected').filter('[value='+data.opt+']').attr('selected', true);
+          $('#company_option').val(data.opt);
         }
     }
     catch ({ name, message }) {

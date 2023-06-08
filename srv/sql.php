@@ -6,11 +6,10 @@ function SQLconnect()
     $dbname = getenv("SQL_DB");
     $dbuser = getenv("SQL_DB");
     $dbpass = getenv("SQL_PWD");
-    
     if (str_contains($dbhost, "cloudsql"))
-        $mysqli = new mysqli($dbhost,$dbname, $dbpass, $dbname, null, $dbhost);
+        $mysqli = new mysqli(null, $dbname, $dbpass, $dbname, null, $dbhost);
     else
-        $mysqli = new mysqli(null, $dbname, $dbpass, $dbname);
+        $mysqli = new mysqli($dbhost,$dbname, $dbpass, $dbname);
 
     // Connect the DB
     if ($mysqli -> connect_errno)

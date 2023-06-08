@@ -50,7 +50,7 @@ function CreateACompany($details, $data, $sql)
         $result = insertData($sql, $data, $company);
     
     return $result;
-   // header('Location: /'.$company_name);
+    header('Location: /'.$company_name);
    // if ($result) $result = $result[0];
    // else unset($result);
    // print_r($user);

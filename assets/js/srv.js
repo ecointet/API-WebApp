@@ -127,11 +127,12 @@ function GetApiResult01()
                     throw new Error('API Failed'); 
                   
                 var city = data.city;
+                var description = data.description;
                 var photo = data.photo;
 
                 $('#game01-result').html(city);
                 $('#title').html(city);
-                $('#description').html("is not far away from you!");
+                $('#description').html(description);
             
                 $("#intro").css({
                     'background'    : 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url('+photo+')',

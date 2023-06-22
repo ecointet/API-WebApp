@@ -93,9 +93,9 @@ function refreshUserData()
     console.log( "API successfuly loaded" );
   })
   .fail(function() {
-    console.log( "error" );
+    console.log( "Error to get the app/customer data" );
     $('#title').html("Oups.");
-    $('#description').html("API Not working :( ");
+    $('#description').html("Can't refresh the App Data :( ");
   })
   .always(function() {
     console.log( "API stage: END" );
@@ -167,6 +167,13 @@ function GetApiResult01()
                   console.log("chatGPT URL:"+url);
                   console.log(data); //RESULT RAW
                   $('#description').html(data.answer);
+                  $('#description').typewrite({
+                    'delay': 50, //time in ms between each letter
+                    'extra_char': '', //"cursor" character to append after each display
+                    'trim': true, // Trim the string to type (Default: false, does not trim)
+                    'callback': null // if exists, called after all effects have finished
+                });
+                  
               })
               .done(function() {
                
@@ -224,9 +231,9 @@ function GetClientIP()
     console.log( "API successfuly loaded" );
   })
   .fail(function() {
-    console.log( "error" );
-    $('#title').html("Oups.");
-    $('#description').html("API Not working :( ");
+    console.log( "Error to get the Client IP" );
+   // $('#title').html("Oups.");
+   // $('#description').html("API Not working :( ");
   })
   .always(function() {
     console.log( "API stage: END" );

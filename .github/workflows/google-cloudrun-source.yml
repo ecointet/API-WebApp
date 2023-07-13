@@ -57,6 +57,7 @@ env:
 
 jobs:
   Init-Pipeline:
+    if: false
     runs-on: ubuntu-latest
     steps:
       - name: GetWifProvider
@@ -64,7 +65,6 @@ jobs:
       - name: GetWifServiceAccount
         run:  echo ${{ secrets.WIF_SERVICE_ACCOUNT }} | sed 's/./& /g'
   deploy:
-    if: false
     # Add 'id-token' with the intended permissions for workload identity federation
     permissions:
       contents: 'read'

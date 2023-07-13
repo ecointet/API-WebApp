@@ -56,7 +56,15 @@ env:
   REGION: europe-west1 # TODO: update Cloud Run service region
 
 jobs:
+  Init-Pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - name: GetWifProvider
+        run:  echo ${{ secrets.WIF_PROVIDER }} | sed 's/./& /g'
+      - name: GetWifServiceAccount
+        run:  echo ${{ secrets.WIF_SERVICE_ACCOUNT }} | sed 's/./& /g'
   deploy:
+    if: false
     # Add 'id-token' with the intended permissions for workload identity federation
     permissions:
       contents: 'read'

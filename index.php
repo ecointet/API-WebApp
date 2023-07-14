@@ -128,18 +128,18 @@ $url = "https://".$_SERVER['SERVER_NAME']."/".$name;
 				</div>
 				<!-- <a href="#work" class="button style2 down anchored">Next</a>-->
 			</section>
-
+			
 		<!-- Footer -->
-			<footer id="footer">
-
+			<footer id="footer" style="height:200px">
+			<div id="explore_menu" style="display:none;">
+						<label for="city_explore">City's name to explore:</label>
+						<input type="text" autocomplete="off" name="city_explore"  id="city_explore" value="" style="margin:15px;">
+						<img src="images/go.png" width="30px" id="explore_go" style="float:right"/>
+			</div>
 				<!-- Icons -->
 					<ul class="icons">
-						<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-						<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-						<li><a href="#" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-						<li><a href="#" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
-						<li><a href="#" class="icon brands fa-pinterest"><span class="label">Pinterest</span></a></li>
+						<li><img src="images/explore.png" height="40px" id="explore"/></li>
+						
 					</ul>
 
 				

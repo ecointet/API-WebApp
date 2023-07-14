@@ -162,7 +162,112 @@ function GetApiResult01()
             {
               $('#loading').fadeIn();
               $('#button01').fadeOut("slow");
-              var url = "/srv/remote-data.php?url=https://api.gcp.cointet.com/chatgpt/"+$('#title').html().replace(/\s/g, '');
+              var url = "/srv/remote-data.php?url=https://api.cointet.com/chatgpt/"+$('#title').html().replace(/\s/g, '');
+              $.getJSON(url, function( data ) {
+                  console.log("chatGPT URL:"+url);
+                  console.log(data); //RESULT RAW
+                  $('#description').html(data.answer);
+                  $('#description').typewrite({
+                    'delay': 50, //time in ms between each letter
+                    'extra_char': '', //"cursor" character to append after each display
+                    'trim': true, // Trim the string to type (Default: false, does not trim)
+                    'callback': null // if exists, called after all effects have finished
+                });
+                  
+              })
+              .done(function() {
+               
+
+              })
+              .always(function() {
+                $('#loading').fadeOut();
+                $('#button01').fadeIn("slow");
+              })
+            }
+          
+          })
+          .fail(function() {
+            console.log( "error" );
+            $('#title').html("Oups.");
+            $('#description').html("API Not working :( ");
+          })
+          .always(function() {
+            console.log( "API stage: END" );
+          });
+    }
+    catch ({ name, message }) {
+        console.log("error:" + name); // "TypeError"
+        console.log("error desc: " + message); // "oops"
+        $('#title').html("Oups.");
+        $('#description').html("API Not working :( ");
+        $("#intro").css({
+            'background'    : 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url('+$("#company_background").val()+')',
+            'background-repeat': 'no-repeat',
+            'background-position': 'center',
+            'background-size': 'cover'
+        });
+      }
+
+    $('#loading').fadeOut();
+    $('#button01').fadeIn("slow");
+}
+
+function Explore(city)
+{
+  var url = encodeURI("https://api.cointet.com/explore/"+city.replace(/\s/g, ''));
+
+    $('#loading').fadeIn();
+    refreshUserData();
+    $('#button01').fadeOut("slow");
+
+    console.log("REMOTE API URL: ["+url+"]");
+
+    try {
+        $.getJSON(url, function( data ) {
+
+            try {   
+                console.log(data); //RESULT RAW
+
+                if (data.city == undefined)
+                    throw new Error('API Failed'); 
+                  
+                var city = data.city;
+                var description = data.description;
+                var photo = data.photo;
+
+                $('#game01-result').html(city);
+                $('#title').html(city);
+                $('#description').html(description);
+            
+                $("#intro").css({
+                    'background'    : 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url('+photo+')',
+                    'background-repeat': 'no-repeat',
+                    'background-position': 'center',
+                    'background-size': 'cover'
+                }).animate({opacity: '0.3'}, "slow").animate({opacity: '1'}, "slow");
+            }
+            catch ({ name, message }) {
+                console.log("error:" + name); // "TypeError"
+                console.log("error desc: " + message); // "oops"
+                $('#title').html("Oups.");
+                $('#description').html("API Not working :( ");
+                $("#intro").css({
+                    'background'    : 'linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),url('+$("#company_background").val()+')',
+                    'background-repeat': 'no-repeat',
+                    'background-position': 'center',
+                    'background-size': 'cover'
+                });
+              }
+        })
+        .done(function() {
+            console.log( "API successfuly loaded" );
+            
+            //CHAT GPT OPTION (EXPERIMENTAL)
+            if ($('#company_option').find(":selected").val() == "chatgpt_option")
+            {
+              $('#loading').fadeIn();
+              $('#button01').fadeOut("slow");
+              var url = "/srv/remote-data.php?url=https://api.cointet.com/chatgpt/"+$('#title').html().replace(/\s/g, '');
               $.getJSON(url, function( data ) {
                   console.log("chatGPT URL:"+url);
                   console.log(data); //RESULT RAW
@@ -269,4 +374,17 @@ function reformatIP(url) {
 $('#config').click(function () {
     
     $('#config_advanced').toggle("slow");
+});
+
+//EXPLORE MENU
+$('#explore').click(function () {
+    
+  $('#explore_menu').toggle("slow");
+  $('#explore').hide("slow");
+});
+
+//EXPLORE SEND
+$('#explore_go').click(function () {
+  Explore($('#city_explore').val());
+  window.scrollTo(0, 0);
 });

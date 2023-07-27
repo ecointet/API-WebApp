@@ -17,6 +17,12 @@ http://localhost:8585
 
 # HOW TO USE IT
 
+Put the API URL you want to use in this form :
+![image](https://raw.githubusercontent.com/ecointet/API-WebApp/main/images/screen-formapi.png)
+
+In case of a mock server url, nothing will be replaced.
+Otherwise if nothing is specified after /locate/, the visitor IP will be inserted.
+
 ## POSTMAN COLLECTION
 Supported End-Point : /locate/<IP>
 JSON variable: city, desc, photo

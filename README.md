@@ -1,6 +1,7 @@
 # API-WEBAPP
 A cool reponsive Web App, made to illustrate APIs.
 
+[ScreenShot](https://raw.githubusercontent.com/ecointet/API-WebApp/main/images/screen-app.png)
 
 ## ONLINE USAGE
 - URL: https://app.cointet.com

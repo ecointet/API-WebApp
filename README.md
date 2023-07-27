@@ -7,7 +7,7 @@ A cool reponsive Web App, made to illustrate APIs.
 
 ### Dedicated Instance for a Prospect
 - URL: https://app.cointet.com/<NAME>
-exemple: https://app.cointet.com/mercedes
+- exemple: https://app.cointet.com/mercedes
 
 ## LOCAL USAGE
 git clone https://github.com/ecointet/API-WebApp.git

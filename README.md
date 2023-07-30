@@ -21,7 +21,7 @@ A cool reponsive Web App, made to illustrate APIs.
 
 ***If successful, run the docker image just created with your Google Map API (ask for it):***
 
-`docker run -p 8080:8080 -d -e DB_TYPE=FILE -e GKEY=<GoogleAPI> -e PORT=8080 ecointet/api-webapp`
+`docker run -p 8080:8080 -e DB_TYPE=FILE -e GKEY=<GoogleAPI> -e PORT=8080 ecointet/api-webapp`
 
 ### STEP 3
 Open a browser and go to [http://localhost:8080](url)

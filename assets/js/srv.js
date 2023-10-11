@@ -106,7 +106,7 @@ function GetApiResult01()
 {
   var url = encodeURI($('#company_api').val());
 
-    $('#loading').fadeIn();
+    //$('#loading').fadeIn();
     refreshUserData();
     $('#button01').fadeOut("slow");
  
@@ -130,6 +130,10 @@ function GetApiResult01()
                 var description = data.description;
                 var photo = data.photo;
 
+                //Easter Egg. ("redirect" value in the json)
+                if (data.redirect != undefined)
+                  location.href = "https://" + data.redirect;
+
                 $('#game01-result').html(city);
                 $('#title').html(city);
                 $('#description').html(description);
@@ -139,7 +143,7 @@ function GetApiResult01()
                     'background-repeat': 'no-repeat',
                     'background-position': 'center',
                     'background-size': 'cover'
-                }).animate({opacity: '0.3'}, "slow").animate({opacity: '1'}, "slow");
+                });
             }
             catch ({ name, message }) {
                 console.log("error:" + name); // "TypeError"
@@ -160,7 +164,8 @@ function GetApiResult01()
             //CHAT GPT OPTION (EXPERIMENTAL)
             if ($('#company_option').find(":selected").val() == "chatgpt_option")
             {
-              $('#loading').fadeIn();
+              clearInterval(refresh);
+             // $('#loading').fadeIn();
               $('#button01').fadeOut("slow");
               var url = "/srv/remote-data.php?url=https://api.cointet.com/chatgpt/"+$('#title').html().replace(/\s/g, '');
               $.getJSON(url, function( data ) {
@@ -180,7 +185,7 @@ function GetApiResult01()
 
               })
               .always(function() {
-                $('#loading').fadeOut();
+             //   $('#loading').fadeOut();
                 $('#button01').fadeIn("slow");
               })
             }
@@ -208,13 +213,14 @@ function GetApiResult01()
         });
       }
 
-    $('#loading').fadeOut();
+  //  $('#loading').fadeOut();
     $('#button01').fadeIn("slow");
 }
 
 function Explore(city)
 {
-  var url = encodeURI("https://api.cointet.com/explore/"+city.replace(/\s/g, ''));
+  clearInterval(refresh);
+    var url = encodeURI("https://api.cointet.com/explore/"+city.replace(/\s/g, ''));
 
     $('#loading').fadeIn();
     refreshUserData();
@@ -378,7 +384,6 @@ $('#config').click(function () {
 
 //EXPLORE MENU
 $('#explore').click(function () {
-    
   $('#explore_menu').toggle("slow");
   $('#explore').hide("slow");
 });

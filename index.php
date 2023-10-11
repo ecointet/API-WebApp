@@ -138,7 +138,7 @@ $url = "https://".$_SERVER['SERVER_NAME']."/".$name;
 			</div>
 				<!-- Icons -->
 					<ul class="icons">
-						<li><img src="images/explore.png" height="40px" id="explore"/></li>
+						<li><img src="images/explore.png" height="40px" id="explore" /></li>
 						
 					</ul>
 
@@ -158,6 +158,18 @@ $url = "https://".$_SERVER['SERVER_NAME']."/".$name;
 			<script src="assets/js/srv.js"></script>
 		<!-- Plugins -->
 			<script src="assets/js/typewriter.js"></script>
+
+		<!-- AUTO REFRESH -->
+		<script>
+		function auto_refresh() {
+			return GetApiResult01();
+		}
+
+		const refresh = setInterval(auto_refresh, 10000);
+	
+		
+		</script>
+
 	</body>
 </html>
 

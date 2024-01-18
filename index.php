@@ -3,12 +3,6 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 ?>
-<!DOCTYPE HTML>
-<!--
-===== Web App To demonstrate tons of APIS
-===== Built for demo purposes (by Postman)
-===== Author: @ecointet (twitter)
--->
 <?php
 require "srv/data.php"; //data management
 
@@ -19,17 +13,23 @@ if (getenv("DB_TYPE") && getenv("DB_TYPE") == "SQL")
 
 $data = connect($sql);
 
+if (!$sql)
+	$data_contest = connect_contest($sql);
+else
+	$data_contest = $data;
+
 //Core SRV
 require "srv/srv.php";
 
 //GET CUSTOMIZED COMPANY - Otherwise default values
-if (isset($result))
+if (isset($result[0]))
 {
-	$logo = $result['logo'];
-	$name = $result['name'];
-	$background = $result['background'];
-	$api = urldecode($result['api']);
-	$option = $result['opt'];
+	$company_id = $result[0]['_id'];
+	$logo = $result[0]['logo'];
+	$name = $result[0]['name'];
+	$background = $result[0]['background'];
+	$api = urldecode($result[0]['api']);
+	$option = $result[0]['opt'];
 }
 else //default values
 {
@@ -40,7 +40,20 @@ else //default values
 	$option = "no_option";
 }
 $url = "https://".$_SERVER['SERVER_NAME']."/".$name;
+
+require "srv/api.php"; //API MODE
 ?>
+
+<!DOCTYPE HTML>
+
+<!--
+===== Congrats! This is the very first step to win the Postman Contest :)
+===== 
+===== Challenge #1 : register your name.
+-----------------------------------
+===== Method: PUT
+-->
+
 <html>
 	<head>
 		<title>Web App - <?php echo $name; ?></title>
@@ -49,9 +62,11 @@ $url = "https://".$_SERVER['SERVER_NAME']."/".$name;
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link type="image/png" sizes="96x96" rel="icon" href="images/favicon.png">
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<link rel="stylesheet" href="assets/css/countdown.css" />
 	</head>
 	<body class="is-preload">
 
+	
 		<!-- Header -->
 			<header id="header">
 				<h1><a href="<?php echo $url; ?>"><img src="<?php echo $logo; ?>" height="43px" style="margin-top:2px"/></a></h1>
@@ -60,15 +75,23 @@ $url = "https://".$_SERVER['SERVER_NAME']."/".$name;
 						<li><a href="#intro">Home</a></li>
 						<li><a href="#one">Share it!</a></li>
 						<li><a href="#two">Configuration</a></li>
+						<li><a href="#contest">Contest</a></li>
 						<!-- <li><a href="#work">Play</a></li>
 						<li><a href="#contact">Contact</a></li> -->
 					</ul>
 				</nav>
+
+				<div align="center" class="clock-wrap" style="display:none" id="countdown">
+				<div class="clock pro-0">
+					<span class="count">0</span>
+						</div>
+					</div>
 			</header>
 
 		<!-- Intro -->
 			<section id="intro" class="main style1 dark fullscreen">
-				<div class="content">
+				<div class="content content_contest">
+
 					<header>
 						<h2 id="title">Hey.</h2>
 					</header>
@@ -88,7 +111,7 @@ $url = "https://".$_SERVER['SERVER_NAME']."/".$name;
 					</header>
 					<p><?php 
 					echo "<a href=".$url.">".$url."</a>";
-					echo '<img src="https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl='.$url.'"%2F&choe=UTF-8" width="100%">';
+					//echo '<img src="https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl='.$url.'"%2F&choe=UTF-8" width="100%">';
 					?></p>
 				</div>
 				<a href="#two" class="button style2 down anchored">Next</a>
@@ -121,14 +144,66 @@ $url = "https://".$_SERVER['SERVER_NAME']."/".$name;
 					</div>
 					<input type="text" autocomplete="off" name="company_api" id="company_api" value="<?php echo $api; ?>">			
 					<input type="hidden" name="client_ip" id="client_ip" value="">
+					<input type="hidden" name="host_url" id="host_url" value="<?php echo "https://".$_SERVER['SERVER_NAME']; ?>">
 					<br>
 					<input type="submit" value="Save">
 					</form></p>
 					<!-- END -->
 				</div>
+				<a href="#contest" class="button style2 down anchored">Next</a>
 				<!-- <a href="#work" class="button style2 down anchored">Next</a>-->
 			</section>
 			
+
+		<!-- Three (Contest) -->
+		<section id="contest" class="main style1 dark fullscreen">
+				<div class="content box style2">
+					<header>
+						<h2>Time to Play!</h2>
+					</header>
+					<p><a href="/?id=<?php echo $name; ?>&contest=start">|Start|</a><a href="/?id=<?php echo $name; ?>&contest=reset#contest">|Reset|</a></p>
+					<div align="center"><label for="max_duration">Countdown</label>
+						<input style="width:10%" type="text" autocomplete="off" name="max_duration" id="max_duration" value="60">
+</div>
+					<div class="content">
+        			<!-- Contest Content -->
+    			</div>
+					<?php
+					//Start Contest Mode
+					if (isset($company_id))
+					{
+						if (isset($_GET['contest']) && $_GET['contest'] == "start")
+						{
+							//InsertPlayer($sql, $data_contest, $company_id, ["company_id" => $company_id, "label" => "Etienne", "score" => 5 ]);
+							//$init_players = GetCurrentPlayers($sql, $data_contest, $company_id);
+							//echo "User list:".json_encode($init_players);
+							$file = file_get_contents('./assets/tagcloud/examples/index.html', true);
+							echo $file;
+						}
+					}
+					else
+						echo "Specify a Company Name to start the contest."
+
+					//GAME
+					?>
+				
+				</div>
+				
+
+					<?php
+					//END
+
+					//RESET Contest
+					if (isset($_GET['contest']) && $_GET['contest'] == "reset")
+					{
+						ResetContest($sql, $data_contest, $company_id);
+					}
+					?>
+				</div>
+				<a href="#two" class="button style2 down anchored">Next</a>
+			</section>
+
+
 		<!-- Footer -->
 			<footer id="footer" style="height:200px">
 			<div id="explore_menu" style="display:none;">
@@ -155,10 +230,10 @@ $url = "https://".$_SERVER['SERVER_NAME']."/".$name;
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-			<script src="assets/js/srv.js"></script>
+			<script src="assets/js/srv.js?version=1.13"></script>
 		<!-- Plugins -->
 			<script src="assets/js/typewriter.js"></script>
-
+			<script src="assets/js/countdown.js"></script>
 		<!-- AUTO REFRESH -->
 		<script>
 		function auto_refresh() {

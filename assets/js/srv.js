@@ -217,9 +217,51 @@ function GetApiResult01()
     $('#button01').fadeIn("slow");
 }
 
-function Explore(city)
+function CreateUserList(data)
+{
+  var result =[];
+
+  for (i = 0; i < data.length; i++) {
+    var txt = data[i].split("|");
+    result.push({ label: txt[0], score: txt[1], country: txt[2], avatar: txt[3], rank: txt[4]});
+  }
+
+  return result;
+}
+
+function UpdateList()
 {
   clearInterval(refresh);
+
+  $('#title').html("");
+  $('#description').html("<div class='corner1'><img style='float: left; margin: -5px;' src='/images/postman-request.png' width='30px'><span style='color:green; font-weight: bold;'> GET </span> <span style='color:grey; font-weight: thin;'>⇆ "+ $('#host_url').val() + "/" + $('#company_name').val()+" </span></div>");
+  $('#button01').fadeOut("slow");
+  $('#countdown').fadeIn("slow");
+
+  
+
+  clock.start($('#max_duration').val());
+  //alert($('#host_url').val());
+
+  $.get($('#host_url').val() + "/?id=" + $('#company_name').val() + "&dashboard=true")
+  .done(function( data ) {
+
+    var list = CreateUserList(data.split(";"));
+    //console.log(list);
+      
+    //console.log(texts);
+    refreshList(list);
+    return true;
+  })
+  .fail(function( jqxhr, textStatus, error ) {
+    var err = textStatus + ", " + error;
+    console.log( "Request Failed: " + err );
+});
+}
+
+function Explore(city)
+{
+    clearInterval(refresh);
     var url = encodeURI("https://api.cointet.com/explore/"+city.replace(/\s/g, ''));
 
     $('#loading').fadeIn();

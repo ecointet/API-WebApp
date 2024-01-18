@@ -42,12 +42,12 @@ function CreateACompany($details, $data, $sql)
     ];
 
     //SEARCH IF COMPANY EXISTS
-    $exist_result = selectData($sql, $data, ["name", "=", "$company_name"], ["_id" => "desc"], 1);
+    $exist_result = selectData($sql, "companies", $data, ["name", "=", "$company_name"], ["_id" => "desc"], 1);
    
     if ($exist_result)
-        $result = updateDataById($sql, $data, $exist_result["_id"], $company);
+        $result = updateDataById($sql, $data, "companies", $exist_result[0]["_id"], $company);
     else
-        $result = insertData($sql, $data, $company);
+        $result = insertData($sql, "companies", $data, $company);
     
     return $result;
    // if ($result) $result = $result[0];
@@ -59,7 +59,7 @@ function CreateACompany($details, $data, $sql)
 //GET EXISTING DATA
 if (isset($_GET['id']))
 {
-    $result = selectData($sql, $data, ["name", "=", strtolower($_GET['id'])], ["_id" => "desc"], 1);
+    $result = selectData($sql, "companies", $data, ["name", "=", strtolower($_GET['id'])], ["_id" => "desc"], 1);
     if (!$result)
     {
         //CREATE A NEW COMPANY ASAP
@@ -114,4 +114,54 @@ function getdatafromapi($url)
 
  return $response;
 }
+
+//CONTEST
+function GetCurrentPlayers($sql, $data, $company_id)
+{
+    $result = selectAllData($sql, "contest", $data, ["company_id", "=", $company_id], ["_id" => "desc"]);
+    return $result;
+}
+
+//CONTEST
+function GetPlayer($sql, $data, $company_id, $name)
+{
+    $result = selectData($sql, "contest", $data, [["label", "=", $name], ["company_id", "=", $company_id]], ["_id" => "desc"], 1);
+    if ($result)
+        return $result[0];
+    return 
+        false;
+}
+
+//CONTEST
+function InsertPlayer($sql, $data, $company_id, $info)
+{
+   // print_r($info);
+    $result = selectData($sql, "contest", $data, [["label", "=", $info['label']], ["company_id", "=", $company_id]], ["_id" => "desc"], 1);
+    
+    if ($result)
+        $result = updateDataById($sql, $data, "contest", $result[0]["_id"], $info);
+    else
+        insertData($sql, "contest", $data, $info);
+
+    //return true;
+    return $result;
+}
+
+//CONTEST
+function ResetContest($sql, $data, $company_id)
+{
+    $result = deleteData($sql, $data, "contest", ["company_id", "=", $company_id]);
+    return $result;
+}
+
+//CONTEST
+function GetKey($sql, $data, $company_id, $name)
+{
+    $result = selectData($sql, "contest", $data, [["label", "=", $name], ["company_id", "=", $company_id]], ["_id" => "desc"], 1);
+    if ($result)
+        return $result[0];
+    return 
+        false;
+}
+
 ?>

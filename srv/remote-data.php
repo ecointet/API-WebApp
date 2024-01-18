@@ -38,9 +38,9 @@ if (isset($_GET['id']))
     $id = $_GET['id'];
 
     //Search in Database
-    $result = selectData($sql, $data, ["name", "like", strtolower($id)], ["_id" => "desc"], 1);
+    $result = selectData($sql, "companies", $data, ["name", "like", strtolower($id)], ["_id" => "desc"], 1);
    // $data->deleteBy(["name", "=", strtolower($id)]);
-   // if ($result) $result =  $result[0];
+    if ($result) $result =  $result[0];
     die(json_encode($result));
 }
 

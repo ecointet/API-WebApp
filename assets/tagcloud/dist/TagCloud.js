@@ -140,19 +140,26 @@
     {
         var size = score * 10;
 
-        return size + "px";
+        if (size >= 50) size = 50;
+        size = size + "px";
+
+        return size;
     }
 
-    function Visualizer(obj)
+    function Visualizer(obj) // DASHBOARD CONTEST
     {
-        var txt = obj.label;
+        var label = "<span style='font-family: silvercrush; font-size: "+CalculateSize(obj.score) + "'>" + obj.label + "</span>";
 
-        if (obj.score == 3)
-          txt = txt + "<br>" + "<img src='https://icons.iconarchive.com/icons/thesquid.ink/free-flat-sample/512/cup-icon.png' height='30px'/>"; 
+        var txt = label;
 
-        if (obj.score == 4)
-          txt = txt + "<br>" + "<img src='https://cdn-icons-png.flaticon.com/512/8692/8692284.png' height='30px'/>"; 
+        if (obj.country != undefined && obj.country.length > 0)
+          txt = label + "<br>" + "<img src='https://flagsapi.com/"+obj.country+"/shiny/64.png'/>"; 
 
+        if (obj.avatar != undefined && obj.avatar.length > 0)
+          txt = "<img width='100px' src='"+obj.avatar + "'/><br>" + label; 
+
+        if (obj.score == 99)
+          txt = "<img width='200px' src='/images/winner.png'/><br>#" + "<span style='font-family: postman-medium; font-size: 30px'>" + obj.rank + "</span> - " + label;
 
         return txt;
     }
@@ -196,7 +203,7 @@
         itemEl.className = self.config.itemClass;
         if (self.config.useItemInlineStyles) {
           itemEl.style.willChange = 'transform, opacity, filter';
-          itemEl.style.fontSize = text.score ? CalculateSize(text.score) : '15px';
+          itemEl.style.fontSize = '15px';
           itemEl.style.position = 'absolute';
           itemEl.style.top = '50%';
           itemEl.style.left = '50%';
@@ -233,6 +240,13 @@
         var textsLength = self.texts.length;
         // if random `true`, It means that a random appropriate place is generated, and the position will be independent of `index`
         if (random) index = Math.floor(Math.random() * (textsLength + 1));
+
+
+        
+
+        if (random)
+        console.log("random:" + index + " taille:" +  textsLength);
+
         var phi = Math.acos(-1 + (2 * index + 1) / textsLength);
         var theta = Math.sqrt((textsLength + 1) * Math.PI) * phi;
         return {
@@ -443,7 +457,7 @@ console.log(texts);
     // rolling radius, unit `px`
     maxSpeed: 'normal',
     // rolling max speed, optional: `slow`, `normal`(default), `fast`
-    initSpeed: 'normal',
+    initSpeed: 'fast',
     // rolling init speed, optional: `slow`, `normal`(default), `fast`
     direction: 135,
     // rolling init direction, unit clockwise `deg`, optional: `0`(top) , `90`(left), `135`(right-bottom)(default)...

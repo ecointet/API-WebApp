@@ -174,15 +174,12 @@ require "srv/api.php"; //API MODE
 					{
 						if (isset($_GET['contest']) && $_GET['contest'] == "start")
 						{
-							//InsertPlayer($sql, $data_contest, $company_id, ["company_id" => $company_id, "label" => "Etienne", "score" => 5 ]);
-							//$init_players = GetCurrentPlayers($sql, $data_contest, $company_id);
-							//echo "User list:".json_encode($init_players);
 							$file = file_get_contents('./assets/tagcloud/examples/index.html', true);
 							echo $file;
 						}
 					}
 					else
-						echo "Specify a Company Name to start the contest."
+						echo "> Specify a Company Name to start the contest."
 
 					//GAME
 					?>

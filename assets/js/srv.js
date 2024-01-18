@@ -229,6 +229,12 @@ function CreateUserList(data)
   return result;
 }
 
+//Change Countdown data
+$("#max_duration").change(function(){
+  clock.stop();
+  clock.start($('#max_duration').val());
+});
+
 function UpdateList()
 {
   clearInterval(refresh);
@@ -237,8 +243,6 @@ function UpdateList()
   $('#description').html("<div class='corner1'><img style='float: left; margin: -5px;' src='/images/postman-request.png' width='30px'><span style='color:green; font-weight: bold;'> GET </span> <span style='color:grey; font-weight: thin;'>⇆ "+ $('#host_url').val() + "/" + $('#company_name').val()+" </span></div>");
   $('#button01').fadeOut("slow");
   $('#countdown').fadeIn("slow");
-
-  
 
   clock.start($('#max_duration').val());
   //alert($('#host_url').val());

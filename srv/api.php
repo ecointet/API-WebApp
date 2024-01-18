@@ -48,10 +48,12 @@ if ($method == 'PUT')
      if (!isset($player["key"]) || isset($_PUT['key']))
      {
          $key = winTheContest($name, $_PUT, $player);
-         InsertPlayer($sql, $data_contest, $company_id, ["company_id" => $company_id, "label" => $name, "score" => 99, "key_value" => $key, "key_time" => time()]);
-     }
+         if ($key != true)
+            InsertPlayer($sql, $data_contest, $company_id, ["company_id" => $company_id, "label" => $name, "score" => 9, "key_value" => $key, "key_time" => time()]);
+        else
+            InsertPlayer($sql, $data_contest, $company_id, ["company_id" => $company_id, "label" => $name, "score" => 99, "key_time" => time()]);
+    }
 
-   
     die(0);
 }
 
@@ -157,10 +159,10 @@ function winTheContest($name, $_PUT, $player)
             $saved_key = $player['key_value'];
         else
             $saved_key = "XX";
-        
+
         $current_key = $_PUT['key'];
 
-        $saved_time = $player['key_time'] + 10;
+        $saved_time = $player['key_time'] + 2;
         $current_time = time();
 
         if ($saved_key != $current_key)
@@ -180,7 +182,7 @@ function winTheContest($name, $_PUT, $player)
         $n_json['intro'] = "CONGRATS !!!!!! YOU SUCCESSFULLY COMPLETED THE CONTEST.";
         $n_json['details'] = "Check the liveboard to see your rank.";
         echo json_encode($n_json);
-        return 1;
+        return true;
     }
     else
     {

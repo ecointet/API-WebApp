@@ -111,7 +111,7 @@ require "srv/api.php"; //API MODE
 					</header>
 					<p><?php 
 					echo "<a href=".$url.">".$url."</a>";
-					//echo '<img src="https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl='.$url.'"%2F&choe=UTF-8" width="100%">';
+					echo '<img src="https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl='.$url.'"%2F&choe=UTF-8" width="100%">';
 					?></p>
 				</div>
 				<a href="#two" class="button style2 down anchored">Next</a>

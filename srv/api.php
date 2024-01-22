@@ -19,42 +19,63 @@ if ($method == 'PUT')
     parse_str(file_get_contents('php://input'), $_PUT);
     header('Content-Type: application/json; charset=utf-8');
 
-    $name = getName($_PUT);
+    $return = getName($_PUT);
+    if (!isset($return['user_name']))
+        die(json_encode($return));
+
+    $name =  $return['user_name'];
+
     $player = GetPlayer($sql, $data_contest, $company_id, $name);
     $score = 2;
 
     //CHALLENGE 0
     if (!$player)
     {
-        $name = getName($_PUT);
+        $return = array_merge($return, getName($_PUT));
+      //  print_r($return);
+        $name = $return['user_name'];
         InsertPlayer($sql, $data_contest, $company_id, ["company_id" => $company_id, "label" => $name, "score" => 2]);
     }
-
-    //CHALLENGE 1
-    if (!isset($player["country"]) || isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
+    else
     {
-        $country = getCountry($name);
-        InsertPlayer($sql, $data_contest, $company_id, ["company_id" => $company_id, "label" => $name, "score" => 5, "country" => $country]);
+        //CHALLENGE 1
+        if ($player["score"] >= 2 && ((!isset($player["country"]) || isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))))
+        {
+            $return = array_merge($return, getCountry($name));
+            if (isset($return['Accept-Language']))
+            {
+                $country = $return['Accept-Language'];
+                InsertPlayer($sql, $data_contest, $company_id, ["company_id" => $company_id, "label" => $name, "score" => 5, "country" => $country]);
+            }
+        }
+
+        //CHALLENGE 2
+        if ($player["score"] >= 5 && (!isset($player["avatar"]) || isset($_PUT['avatar'])))
+        {
+            $return = array_merge($return, getYourAvatar($name, $_PUT));
+            if (isset($return['avatar']))
+            {
+                $avatar = $return['avatar'];
+                InsertPlayer($sql, $data_contest, $company_id, ["company_id" => $company_id, "label" => $name, "score" => 7, "avatar" => $avatar]);
+            }
+        }
+
+        //FINAL CHALLENGE
+        if ($player["score"] >= 7 && (!isset($player["key"]) || isset($_PUT['key'])))
+        {
+            $return = array_merge($return, winTheContest($name, $_PUT, $player));
+
+            if (isset($return['user_key']))
+            {
+            if ($return['user_key'] != "WIN")
+                InsertPlayer($sql, $data_contest, $company_id, ["company_id" => $company_id, "label" => $name, "score" => 10, "key_value" => $return['user_key'], "key_time" => time()]);
+            else
+                InsertPlayer($sql, $data_contest, $company_id, ["company_id" => $company_id, "label" => $name, "score" => 99, "key_time" => time()]);
+            }
+        }
     }
-
-     //CHALLENGE 2
-     if (!isset($player["avatar"]) || isset($_PUT['avatar']))
-     {
-         $avatar = getYourAvatar($name, $_PUT);
-         InsertPlayer($sql, $data_contest, $company_id, ["company_id" => $company_id, "label" => $name, "score" => 7, "avatar" => $avatar]);
-     }
-
-     //FINAL CHALLENGE
-     if (!isset($player["key"]) || isset($_PUT['key']))
-     {
-         $key = winTheContest($name, $_PUT, $player);
-         if ($key != "WIN")
-            InsertPlayer($sql, $data_contest, $company_id, ["company_id" => $company_id, "label" => $name, "score" => 10, "key_value" => $key, "key_time" => time()]);
-        else
-            InsertPlayer($sql, $data_contest, $company_id, ["company_id" => $company_id, "label" => $name, "score" => 99, "key_time" => time()]);
-    }
-
-    die(0);
+   // print_r($return);
+    die(json_encode($return));
 }
 
 if ($method == 'DELETE') {
@@ -74,14 +95,16 @@ function getName($_PUT)
         $n_json['tab'] = "Body";
         $n_json['type'] = "x-www-form-urlencoded";
         $n_json['key'] = "name";
-        $n_json['value'] = "<YOUR-NAME>";   
-        die(json_encode($n_json)); 
+        $n_json['value'] = "<YOUR-NAME>";  
+        return $n_json;
+        //die(json_encode($n_json)); 
     }
     else
     {
         $n_json['intro2'] = "Welcome ".$_PUT['name']; 
-        echo json_encode($n_json);
-        return $_PUT['name'];
+        $n_json['user_name'] = $_PUT['name'];
+       // echo json_encode($n_json);
+        return $n_json;
     }
 
     return false;
@@ -93,20 +116,21 @@ function getCountry($name)
 
     if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']))
     {
-        $n_json['intro'] = "Congrats!)";
+        $n_json['intro'] = "Congrats!";
         $n_json['intro2'] = "🌍 Your Country is ".$_SERVER['HTTP_ACCEPT_LANGUAGE'];
-        echo json_encode($n_json);
-        return $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+        $n_json['Accept-Language'] = $_SERVER['HTTP_ACCEPT_LANGUAGE'];
+
+        return $n_json;
     }
     else
     {
-        $n_json['intro'] = "Ready for the 2nd Challenge ".$name." ?";
         $n_json['intro2'] = "Where are your from? Be proud and specify your Country Code (ex: GB)";
         $n_json['intro3'] = "Here are few instructions:";
         $n_json['tab'] = "Headers";
         $n_json['key'] = "Accept-Language";
         $n_json['value'] = "<SHORT-COUNTRY-CODE>";
-        die(json_encode($n_json)); 
+       
+        return $n_json;
     }
 
     return false;
@@ -118,8 +142,8 @@ function getYourAvatar($name, $_PUT)
     {
         $n_json['intro'] = "Nice job! You set your avatar !";
         $n_json['avatar'] = $_PUT['avatar'];
-        echo json_encode($n_json);
-        return $_PUT['avatar'];
+   
+        return $n_json;
     }
     else
     {
@@ -130,7 +154,8 @@ function getYourAvatar($name, $_PUT)
         $n_json['type'] = "x-www-form-urlencoded";
         $n_json['key'] = "avatar";
         $n_json['value'] = "<FULL-URL>"; 
-        die(json_encode($n_json)); 
+        
+        return $n_json;
     }
 
     return false;
@@ -143,15 +168,15 @@ function winTheContest($name, $_PUT, $player)
     {
         $n_json['intro'] = "Congrats!)";
         $n_json['details'] = "Your temporary key is available.";
-        $n_json['your_key'] = getRandomStringRand();
+        $n_json['user_key'] = getRandomStringRand();
         $n_json['hit1'] = "Now, transmit the key to complete the contest!!!!";
         $n_json['intro3'] = "Here are few instructions:";
         $n_json['tab'] = "Body";
         $n_json['type'] = "x-www-form-urlencoded";
         $n_json['key'] = "key";
-        $n_json['value'] = "<YOUR-KEY> (ex: ".$n_json['your_key'].")";
-        echo json_encode($n_json);
-        return $n_json['your_key'];
+        $n_json['value'] = "<YOUR-KEY> (ex: ".$n_json['user_key'].")";
+ 
+        return $n_json;
     }
     else if (isset($_PUT['key']) && $_PUT['key'] != "get")
     {
@@ -167,22 +192,27 @@ function winTheContest($name, $_PUT, $player)
 
         if ($saved_key != $current_key)
         {
-            $n_json['intro'] = "OUPS! The key sent is different than the key expected";
-            $n_json['intro2'] = "Please, get your key first (key=get), then use it (key=<YOUR-KEY>).";
-            die(json_encode($n_json));
+            $n_json['intro2'] = "OUPS! The key sent is different than the key expected";
+            $n_json['intro'] = "Please, get your key first (key=get), then use it (key=<YOUR-KEY>).";
+            $n_json['user_key'] = "XXXXX";
+
+            return $n_json;
         }
 
         if ($saved_key == $current_key && $saved_time < $current_time)
         {
-            $n_json['intro'] = "Yes.... and no! You got the right key but it expired.";
-            $n_json['intro2'] = "Please, do the same operation in less than 200ms. Use Postman Run Collection & scripts to avoid manual steps.";
-            die(json_encode($n_json));
+            $n_json['intro2'] = "Yes.... and no! You got the right key but it expired.";
+            $n_json['intro'] = "Please, do the same operation in less than 2s. Use Postman Run Collection & scripts to avoid manual steps.";
+            $n_json['user_key'] = "XXXXX";
+
+            return $n_json;
         }
 
         $n_json['intro'] = "CONGRATS !!!!!! YOU SUCCESSFULLY COMPLETED THE CONTEST.";
         $n_json['details'] = "Check the liveboard to see your rank.";
-        echo json_encode($n_json);
-        return "WIN";
+        $n_json['user_key'] = "WIN";
+
+        return $n_json;
     }
     else
     {
@@ -194,7 +224,7 @@ function winTheContest($name, $_PUT, $player)
         $n_json['key'] = "key";
         $n_json['value'] = "get";
 
-        die(json_encode($n_json)); 
+        return $n_json;
     }
 
     return false;

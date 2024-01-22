@@ -26,6 +26,7 @@ $('#company_name').on('input', function() {
   if ($('#company_name').val().length > 1)
   {
   var url = "/srv/remote-data.php?id="+$("#company_name").val()+"%";
+  //console.log(url);
   //CLEAN CONFIG
   $('#company_logo').val("");
   $('#company_background').val("");
@@ -247,7 +248,7 @@ function UpdateList()
   clock.start($('#max_duration').val());
   //alert($('#host_url').val());
 
-  $.get($('#host_url').val() + "/?id=" + $('#company_name').val() + "&dashboard=true")
+  $.get("/?id=" + $('#company_name').val() + "&dashboard=true")
   .done(function( data ) {
 
     var list = CreateUserList(data.split(";"));

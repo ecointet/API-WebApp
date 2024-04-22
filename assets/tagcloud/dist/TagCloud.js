@@ -239,7 +239,7 @@
         var self = this;
         var textsLength = self.texts.length;
         // if random `true`, It means that a random appropriate place is generated, and the position will be independent of `index`
-        if (random) index = Math.floor(Math.random() * (textsLength + 1));
+        //if (random) index = Math.floor(Math.random() * (textsLength + 1));
 
 
         

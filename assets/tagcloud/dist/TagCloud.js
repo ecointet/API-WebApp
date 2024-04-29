@@ -138,7 +138,7 @@
 
     function CalculateSize(score)
     {
-        var size = score * 10;
+        var size = score * 15;
 
         if (size >= 50) size = 50;
         size = size + "px";

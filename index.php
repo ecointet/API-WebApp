@@ -110,8 +110,8 @@ require "srv/api.php"; //API MODE
 						<h2>Share it!</h2>
 					</header>
 					<p><?php 
-					echo "<a href=".$url.">".$url."</a>";
-					echo '<img src="https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl='.$url.'"%2F&choe=UTF-8" width="100%">';
+					echo "<a href=".$url.">".$url."</a><br><br>";
+					echo '<img src="https://qrcode.tec-it.com/API/QRCode?data='.$url.'"%2F&choe=UTF-8" width="100%">';
 					?></p>
 				</div>
 				<a href="#two" class="button style2 down anchored">Next</a>

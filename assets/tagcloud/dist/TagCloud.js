@@ -156,7 +156,7 @@
           txt = label + "<br>" + "<img src='https://flagsapi.com/"+obj.country+"/shiny/64.png'/>"; 
 
         if (obj.avatar != undefined && obj.avatar.length > 0)
-          txt = "<img width='100px' src='"+obj.avatar + "'/><br>" + label; 
+          txt = "<img width='150px' style='border-radius: 50%;' src='"+obj.avatar + "'/><br>" + label; 
 
         if (obj.score == 99)
           txt = "<img width='200px' src='/images/winner.png'/><br>#" + "<span style='font-family: postman-medium; font-size: 30px'>" + obj.rank + "</span> - " + label;

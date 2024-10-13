@@ -66,7 +66,20 @@ require "srv/api.php"; //API MODE
 	</head>
 	<body class="is-preload">
 
-	
+	<script>
+		//CHATBOT
+window.embeddedChatbotConfig = {
+chatbotId: "jpUedokIOuIYj1iL4tFIF",
+domain: "www.chatbase.co"
+}
+</script>
+<script
+src="https://www.chatbase.co/embed.min.js"
+chatbotId="jpUedokIOuIYj1iL4tFIF"
+domain="www.chatbase.co"
+defer>
+//END CHATBOT
+</script>
 		<!-- Header -->
 			<header id="header">
 				<h1><a href="<?php echo $url; ?>"><img src="<?php echo $logo; ?>" height="43px" style="margin-top:2px"/></a></h1>

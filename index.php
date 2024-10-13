@@ -196,12 +196,6 @@ defer>
 
 					//GAME
 					?>
-				<iframe
-src="https://www.chatbase.co/chatbot-iframe/jpUedokIOuIYj1iL4tFIF"
-width="100%"
-style="height: 600px; min-height: 700px"
-frameborder="0"
-></iframe>
 				</div>
 				
 
@@ -217,6 +211,21 @@ frameborder="0"
 				</div>
 				<a href="#two" class="button style2 down anchored">Next</a>
 			</section>
+
+			<!-- FOUR (ChatBot) -->
+		<section id="chatbot" class="main style1 dark fullscreen">
+				<div class="content box style2">
+					<iframe
+					src="https://www.chatbase.co/chatbot-iframe/jpUedokIOuIYj1iL4tFIF"
+					width="100%"
+					style="height: 600px; min-height: 800px"
+					frameborder="0"
+					>
+					</iframe>
+				</div>
+
+				<a href="#two" class="button style2 down anchored">Next</a>
+		</section>
 
 
 		<!-- Footer -->

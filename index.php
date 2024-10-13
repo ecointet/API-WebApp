@@ -196,7 +196,12 @@ defer>
 
 					//GAME
 					?>
-				
+				<iframe
+src="https://www.chatbase.co/chatbot-iframe/jpUedokIOuIYj1iL4tFIF"
+width="100%"
+style="height: 600px; min-height: 700px"
+frameborder="0"
+></iframe>
 				</div>
 				
 

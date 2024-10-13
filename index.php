@@ -89,6 +89,7 @@ defer>
 						<li><a href="#one">Share it!</a></li>
 						<li><a href="#two">Configuration</a></li>
 						<li><a href="#contest">Contest</a></li>
+						<li><a href="#chatbot">ChatBOT</a></li>
 						<!-- <li><a href="#work">Play</a></li>
 						<li><a href="#contact">Contact</a></li> -->
 					</ul>

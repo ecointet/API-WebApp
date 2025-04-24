@@ -213,19 +213,14 @@ defer>
 				<a href="#two" class="button style2 down anchored">Next</a>
 			</section>
 
-			<!-- FOUR (ChatBot) -->
-		<section id="chatbot" class="main style1 dark fullscreen">
+			<!-- CONTACT -->
+		<section id="contact" class="main style1 dark fullscreen">
 				<div class="content box style2">
-					<iframe
-					src="https://www.chatbase.co/chatbot-iframe/jpUedokIOuIYj1iL4tFIF"
-					width="100%"
-					style="height: 600px; min-height: 800px"
-					frameborder="0"
-					>
-					</iframe>
+					<header>
+						<h2>Contact</h2>
+					</header>
+					<p>Contact us on linkedin: <a href="https://www.linkedin.com/in/ecointet/" target="_blank">Etienne Cointet</a></p>
 				</div>
-
-				<a href="#two" class="button style2 down anchored">Next</a>
 		</section>
 
 

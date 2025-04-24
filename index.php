@@ -66,20 +66,6 @@ require "srv/api.php"; //API MODE
 	</head>
 	<body class="is-preload">
 
-	<script>
-		//CHATBOT
-window.embeddedChatbotConfig = {
-chatbotId: "jpUedokIOuIYj1iL4tFIF",
-domain: "www.chatbase.co"
-}
-</script>
-<script
-src="https://www.chatbase.co/embed.min.js"
-chatbotId="jpUedokIOuIYj1iL4tFIF"
-domain="www.chatbase.co"
-defer>
-//END CHATBOT
-</script>
 		<!-- Header -->
 			<header id="header">
 				<h1><a href="<?php echo $url; ?>"><img src="<?php echo $logo; ?>" height="43px" style="margin-top:2px"/></a></h1>
@@ -89,6 +75,7 @@ defer>
 						<li><a href="#one">Share it!</a></li>
 						<li><a href="#two">Configuration</a></li>
 						<li><a href="#contest">Contest</a></li>
+						<li><a href="#contact">Contact</a></li>
 					</ul>
 				</nav>
 
@@ -210,16 +197,15 @@ defer>
 				<a href="#two" class="button style2 down anchored">Next</a>
 			</section>
 
-			<!-- CONTACT -->
-		<section id="contact" class="main style1 dark fullscreen">
+			<section id="contact" class="main style2 right dark fullscreen">
 				<div class="content box style2">
 					<header>
 						<h2>Contact</h2>
 					</header>
-					<p>Contact us on linkedin: <a href="https://www.linkedin.com/in/ecointet/" target="_blank">Etienne Cointet</a></p>
-				</div>
-		</section>
-
+					<p>For any question, please contact us at linkedin <a href="https://www.linkedin.com/in/ecointet">Etienne</a>
+					</p>
+					</div>
+				</section>
 
 		<!-- Footer -->
 			<footer id="footer" style="height:200px">

@@ -1,3 +1,3 @@
 DirectoryIndex index.html
-RewriteEngine ON
-RewriteBase /credit-agricole
+RewriteEngine On
+RRedirectMatch ^/$ /credit-agricole/

@@ -1,0 +1,57 @@
+version: '3'
+ 
+services:
+  db:
+    image: mysql:latest
+    container_name: db
+    environment:
+      MYSQL_ROOT_PASSWORD: api-webapp
+      MYSQL_DATABASE: api-webapp
+      MYSQL_USER: api-webapp
+      MYSQL_PASSWORD: pwdsecret
+    ports:
+      - "6033:3306"
+   # volumes:
+   #   - dbdata:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: pma
+    links:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: always
+    ports:
+      - 8081:80
+  api-webapp:
+    image: ecointet/api-webapp
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - GKEY=AIzaSyA8VWh_40pd430228DP72uZSR6X63eSOu4
+      - PORT=8080
+      - DB_TYPE=SQL
+      - SQL_DB=api-webapp
+      - SQL_HOST=db
+      - SQL_PWD=pwdsecret
+    links:
+      - db
+  api-server:
+    image: ecointet/api-webserver
+    restart: always
+    ports:
+      - 8585:8585
+    environment:
+      - GKEY=AIzaSyA8VWh_40pd430228DP72uZSR6X63eSOu4
+      - PORT=8585
+      - DB_TYPE=SQL
+      - SQL_DB=api-webapp
+      - SQL_HOST=db
+      - SQL_PWD=pwdsecret
+    links:
+      - db
+volumes:
+  dbdata:

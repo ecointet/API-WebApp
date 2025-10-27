@@ -19,7 +19,7 @@ A cool reponsive Web App, made to illustrate APIs.
 ### STEP 2
 `docker build -t ecointet/api-webapp .`
 
-***If successful, run the docker image just created with your Google Map API (ask for it):***
+***If successful, run the docker image just created with your Google API (ask for it):***
 
 `docker run -p 8080:8080 -e DB_TYPE=FILE -e GKEY=<GoogleAPI> -e PORT=8080 ecointet/api-webapp`
 

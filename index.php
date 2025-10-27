@@ -75,7 +75,6 @@ require "srv/api.php"; //API MODE
 						<li><a href="#one">Share it!</a></li>
 						<li><a href="#two">Configuration</a></li>
 						<li><a href="#contest">Contest</a></li>
-						<li><a href="#contact">Contact</a></li>
 					</ul>
 				</nav>
 
@@ -197,15 +196,7 @@ require "srv/api.php"; //API MODE
 				<a href="#two" class="button style2 down anchored">Next</a>
 			</section>
 
-			<section id="contact" class="main style2 right dark fullscreen">
-				<div class="content box style2">
-					<header>
-						<h2>Contact</h2>
-					</header>
-					<p>For any question, please contact us at linkedin <a href="https://www.linkedin.com/in/ecointet">Etienne</a>
-					</p>
-					</div>
-				</section>
+			<!-- END OF SECTIONS -->
 
 		<!-- Footer -->
 			<footer id="footer" style="height:200px">

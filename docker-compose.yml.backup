@@ -1,0 +1,23 @@
+version: '3.0'
+
+services:
+  api-webapp:
+    image: ecointet/api-webapp
+    restart: always
+    ports:
+      - 8080:8080
+    environment:
+      - GKEY=AIzaSyA8VWh_40pd430228DP72uZSR6X63eSOu4
+      - PORT=8080
+      - SQL_DB=api-webapp
+      - SQL_HOST=localhost
+      - SQL_PWD=pwdsecret 
+  mysql:
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=pwdsecret
+      - MYSQL_DATABASE=api-webapp
+      - MYSQL_USER=api-webapp
+      - MYSQL_PASSWORD=pwdsecret

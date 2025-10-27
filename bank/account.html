@@ -1,0 +1,54 @@
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: url('images/account.png') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100vh;
+}
+</style>
+<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5);">
+    <form id="loginForm" onsubmit="event.preventDefault(); 
+        fetch('https://api.cointet.com/login/' + document.getElementById('identifiant').value)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+            const text = 'Bienvenue ' + (data.firstname || '') + ' ' + (data.lastname || '') + ' !';
+            const form = document.getElementById('loginForm');
+            let msg = document.getElementById('welcomeMessage');
+            if (!msg) {
+                msg = document.createElement('div');
+                msg.id = 'welcomeMessage';
+                msg.style.margin = '0 0 15px 0';
+                msg.style.padding = '10px';
+                msg.style.background = 'rgba(255,255,255,0.9)';
+                msg.style.borderRadius = '5px';
+                msg.style.color = '#007bff';
+                msg.style.textAlign = 'center';
+                form.insertBefore(msg, form.firstChild);
+            }
+            msg.textContent = text;
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+    ">
+        <div style="margin-bottom: 15px;">
+            <input type="text" id="identifiant" placeholder="Identifiant" style="padding: 8px; width: 200px;">
+        </div>
+        <div style="margin-bottom: 15px;">
+            <input type="password" id="password" placeholder="Mot de passe" style="padding: 8px; width: 200px;">
+        </div>
+        <button type="submit" style="padding: 8px 20px; background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer;">
+            Connexion
+        </button>
+    </form>
+</div>

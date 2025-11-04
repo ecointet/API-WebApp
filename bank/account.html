@@ -21,7 +21,7 @@ body {
         })
         .then(data => {
             console.log(data);
-            const text = 'Bienvenue ' + (data.firstname || '') + ' ' + (data.lastname || '') + ' !';
+            const text = 'Loading your account page... <br> Bank Account found:' + (data.firstname || '') + ' ' + (data.lastname || '') + '<br>';
             const form = document.getElementById('loginForm');
             let msg = document.getElementById('welcomeMessage');
             if (!msg) {

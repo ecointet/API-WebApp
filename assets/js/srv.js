@@ -21,6 +21,10 @@ $("#company_api").on("focus", function() {
   $("#company_api").val("");
 });
 
+//GET DATA
+
+
+
 //AUTO-COMPLETE
 $('#company_name').on('input', function() {
   if ($('#company_name').val().length > 1)
@@ -440,3 +444,62 @@ $('#explore_go').click(function () {
   Explore($('#city_explore').val());
   window.scrollTo(0, 0);
 });
+
+//GET DATA FROM API
+function GetData(arg) {
+  // If no argument provided, use empty string
+  var argument = arg || '';
+  var url = 'https://api.cointet.com/GetData/' + argument;
+  
+  console.log('GetData: calling ' + url);
+  
+  $.ajax({
+    url: url,
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+      console.log('GetData: Success', data);
+      try {
+        // Verify that we have valid JSON
+        if (typeof data === 'object' && data !== null) {
+          console.log('GetData: Valid JSON response');
+
+          if (data.img && data.img.length < 10 || data.img === undefined) {
+            console.log('GetData: No Data found: Image field is too short');
+            $('#description').html('Error: Data  is invalid');
+            $('#error').show();
+          } else {
+            $('#description').html('<img src="' + data.img + '" width="100%"/>');
+            $('#error').hide();
+          }
+          return data;
+        } else {
+          console.error('GetData: Invalid JSON format');
+          $('#description').html('Error: Invalid JSON format received');
+          $('#error').show();
+        }
+      } catch (e) {
+        console.error('GetData: JSON parsing error', e);
+        $('#description').html('Error: ' + e.message);
+        $('#error').show();
+      }
+    },
+    error: function(xhr, status, error) {
+      console.error('GetData: API Error', error);
+      var errorMessage = 'Error: Unable to fetch data from API';
+      if (xhr.status === 404) {
+        errorMessage = 'Error: Data not found (404)';
+      } else if (xhr.status === 500) {
+        errorMessage = 'Error: Server error (500)';
+      } else if (error === 'parsererror') {
+        errorMessage = 'Error: Invalid JSON response';
+      } else if (error === 'timeout') {
+        errorMessage = 'Error: Request timeout';
+      }
+      console.error(errorMessage);
+      $('#description').html(errorMessage);
+      $('#error').show();
+     // alert(errorMessage);
+    }
+  });
+}

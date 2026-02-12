@@ -90,9 +90,9 @@ require "srv/api.php"; //API MODE
 				<div class="content content_contest">
 
 					<header>
-						<h2 id="title">Hey.</h2>
+						<h2 id="title">Welcome!</h2>
 					</header>
-					<p id="description">Welcome to <strong>your Web App</strong>, now you probably need some APIs to make it cool.</p>
+					<p id="description">What do you want <strong>to do </strong> today?</p>
 					<p id="error" style="display:none; color: red; font-size: 35px; text-align: center;">
 						<img src="images/error.png" height="50px" style="margin-right: 10px; vertical-align: middle;"/>
 						<span id="error-text">Error with the API - can't process</span>
@@ -100,7 +100,7 @@ require "srv/api.php"; //API MODE
 					<footer>
 					<!--	<div id="loading" style="display: none;">Fetching API data...</div>-->
 				<!--	<img id="button01" src="images/sync.png" width="80px" onclick="GetApiResult01()"></img> -->
-					<button id="download_button" style="border: 1px solid black; background-color: white; color: black; padding: 0px 50px; cursor: pointer; font-weight: bold;font-size: 20px;" onclick="GetData('Passeport')">DOWNLOAD MY PASSEPORT</button>
+					<button id="download_button" style="border: 1px solid black; background-color: white; color: black; padding: 10px 40px; cursor: pointer; font-weight: bold; font-size: clamp(14px, 4vw, 20px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90vw;" onclick="GetData('Passeport')">DOWNLOAD MY PASSEPORT</button>
 					</footer>
 				</div>
 			</section>

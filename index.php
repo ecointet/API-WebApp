@@ -100,7 +100,7 @@ require "srv/api.php"; //API MODE
 					<footer>
 					<!--	<div id="loading" style="display: none;">Fetching API data...</div>-->
 				<!--	<img id="button01" src="images/sync.png" width="80px" onclick="GetApiResult01()"></img> -->
-					<button id="download_button" style="border: 1px solid black; background-color: white; color: black; padding: 10px 40px; cursor: pointer; font-weight: bold; font-size: clamp(14px, 4vw, 20px); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 90vw;" onclick="GetData('Passeport')">DOWNLOAD MY PASSEPORT</button>
+					<button id="download_button" style="border: 1px solid black; background-color: white; color: black; padding: 0px 50px; cursor: pointer; font-weight: bold; font-size: 20px; display: block; margin: 20px auto; width: 80%; max-width: 400px;" onclick="GetData('Passeport')">DOWNLOAD MY PASSEPORT</button>
 					</footer>
 				</div>
 			</section>

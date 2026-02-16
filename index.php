@@ -232,7 +232,7 @@ require "srv/api.php"; //API MODE
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-			<script src="assets/js/srv.js?version=1.13"></script>
+			<script src="assets/js/srv.js?version=1.15"></script>
 		<!-- Plugins -->
 			<script src="assets/js/typewriter.js"></script>
 			<script src="assets/js/countdown.js"></script>

@@ -464,12 +464,12 @@ function GetData(arg) {
         if (typeof data === 'object' && data !== null) {
           console.log('GetData: Valid JSON response');
 
-          if (data.img && data.img.length < 10 || data.img === undefined) {
-            console.log('GetData: No Data found: Image field is too short');
+          if (data.content && data.content.length < 10 || data.content === undefined) {
+            console.log('GetData: No Data found: Content field is too short');
             $('#description').html('Error: Data  is invalid');
             $('#error').show();
           } else {
-            $('#description').html('<img src="' + data.img + '" width="100%"/>');
+            $('#description').html('<img src="' + data.content + '" width="100%"/>');
             $('#error').hide();
           }
           return data;

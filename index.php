@@ -60,9 +60,12 @@ require "srv/api.php"; //API MODE
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
-		<link type="image/png" sizes="96x96" rel="icon" href="images/favicon.png">
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 		<link rel="stylesheet" href="assets/css/countdown.css" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+		<link rel="manifest" href="/site.webmanifest">
 	</head>
 	<body class="is-preload">
 

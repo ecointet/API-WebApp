@@ -103,7 +103,7 @@ require "srv/api.php"; //API MODE
 					<footer>
 					<!--	<div id="loading" style="display: none;">Fetching API data...</div>-->
 				<!--	<img id="button01" src="images/sync.png" width="80px" onclick="GetApiResult01()"></img> -->
-					<button id="download_button" style="border: 1px solid black; background-color: white; color: black; padding: 50px; cursor: pointer; font-weight: bold; font-size: 20px; display: block; margin: 20px auto; width: 80%; max-width: 400px; height: auto; line-height: 1.5;" onclick="GetData('Passeport')">DOWNLOAD MY PASSEPORT</button>
+					<button id="download_button" style="border: 1px solid black; background-color: white; color: black; padding: 50px; cursor: pointer; font-weight: bold; font-size: 20px; display: block; margin: 20px auto; width: 80%; max-width: 400px; height: auto; line-height: 1.5;" onclick="GetData('Document')">DOWNLOAD MY DOCUMENT</button>
 					</footer>
 				</div>
 			</section>

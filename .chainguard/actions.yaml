@@ -1,0 +1,5 @@
+# Chainguard Guardener: Hardened Actions
+enabled: true
+migrate:
+  enabled: true
+  period: "168h"

@@ -1,0 +1,6 @@
+# Chainguard Guardener: Container Image Suggestions and Migration
+enabled: true
+prefer_fips: false
+migrate:
+  enabled: true
+  period: "168h"
